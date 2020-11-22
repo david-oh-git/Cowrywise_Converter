@@ -1,5 +1,6 @@
 import extentions.applyDefault
 
+plugins.apply(BuildPlugins.git_hooks)
 
 allprojects {
     repositories.applyDefault()

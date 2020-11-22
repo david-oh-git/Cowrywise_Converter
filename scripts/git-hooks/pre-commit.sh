@@ -1,11 +1,11 @@
 #!/bin/sh
 echo "Running pre -commit checks..."
 
-JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+JAVA_HOME=$(/usr/lib/jvm/java-8-openjdk-amd64 -v 1.8)
 export JAVA_HOME
 
 OUTPUT="/tmp/res"
-./gradlew ktlint spotlessApply --daemon > ${OUTPUT}
+./gradlew ktlintFormat ktlint spotlessApply --daemon > ${OUTPUT}
 EXIT_CODE=$?
 if [ ${EXIT_CODE} -ne 0 ]; then
     cat ${OUTPUT}

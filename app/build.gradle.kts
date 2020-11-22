@@ -14,8 +14,10 @@ import dependencies.BuildDependencies.material_components
 import dependencies.BuildDependencies
 
 plugins {
-    id("com.android.application")
-    id ("kotlin-android")
+    id(BuildPlugins.android_application)
+    kotlin (BuildPlugins.kotlin_android)
+    kotlin(BuildPlugins.kotlin_kapt)
+    kotlin(BuildPlugins.kotlin_android_extention)
 }
 
 android {
@@ -51,6 +53,28 @@ android {
         getByName("androidTest") {
             java.srcDir("src/androidTest/kotlin")
         }
+    }
+
+    buildTypes {
+
+        getByName(BuildType.RELEASE){
+            isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
+            proguardFiles( getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+
+        getByName(BuildType.DEBUG){
+            applicationIdSuffix = BuildTypeDebug.applicationIdSuffix
+            isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
+            versionNameSuffix = BuildTypeDebug.versionNameSuffix
+            isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
+        }
+
+    }
+
+    lintOptions {
+        lintConfig = rootProject.file(".lint/config.xml")
+        isCheckAllWarnings = true
+        isWarningsAsErrors = true
     }
 }
 

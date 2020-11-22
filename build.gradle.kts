@@ -1,11 +1,9 @@
-
+import extentions.applyDefault
 
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+    repositories.applyDefault()
 
-    
+    plugins.apply(BuildPlugins.spotless)
+    plugins.apply(BuildPlugins.ktlint)
 }

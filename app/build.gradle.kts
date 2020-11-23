@@ -12,6 +12,8 @@ import dependencies.BuildDependencies.kotlin_coroutines_android
 import dependencies.BuildDependencies.kotlin_coroutines_core
 import dependencies.BuildDependencies.material_components
 import dependencies.BuildDependencies
+import dependencies.BuildDependencies.timber
+import extentions.getLocalProperty
 
 plugins {
     id(BuildPlugins.android_application)
@@ -76,10 +78,29 @@ android {
         isCheckAllWarnings = true
         isWarningsAsErrors = true
     }
+
+    buildTypes.forEach {
+        try{
+            it.buildConfigField(
+                "String",
+                "FIXER_API_KEY",
+                getLocalProperty("fixer.access.key")
+            )
+        }catch (e: Exception){
+            throw InvalidUserDataException("Define fixer.io API access key in local.properties " +
+                    "file as 'fixer.access.key'. Visit https://fixer.io to get keys ")
+        }
+    }
+
+    buildFeatures{
+        dataBinding = true
+    }
 }
 
 dependencies {
     implementation( fileTree( mapOf( "dir" to "libs", "include" to  listOf("*.jar")  )))
+
+    implementation( project(BuildModules.CORE))
 
     implementation(BuildDependencies.kotlin)
     implementation(app_compat)
@@ -87,4 +108,5 @@ dependencies {
     implementation(constraints_layout)
     implementation(kotlin_coroutines_android)
     implementation(kotlin_coroutines_core)
+    implementation(timber)
 }

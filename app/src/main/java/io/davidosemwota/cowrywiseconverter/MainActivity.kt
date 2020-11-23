@@ -25,10 +25,30 @@ package io.davidosemwota.cowrywiseconverter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import io.davidosemwota.core.network.FixerIoApiFactory
+import io.davidosemwota.cowrywiseconverter.databinding.ActivityMainBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        GlobalScope.launch {
+            val key = BuildConfig.FIXER_API_KEY
+            val result = FixerIoApiFactory.provideFixerApiService().getHistoricalRates(
+                "2013-12-24",
+                key,
+                "GBP",
+                "USD,CAD,EUR"
+            )
+
+            Timber.d("Response successful?  ${result.success}")
+            Timber.d("Rate is ${result.rates?.data}")
+        }
     }
 }

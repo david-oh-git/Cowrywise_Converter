@@ -7,6 +7,7 @@ import BuildAndroidConfig.test_instrumentation_runner
 import BuildAndroidConfig.version_code
 import BuildAndroidConfig.version_name
 import dependencies.BuildDependencies
+import extentions.getLocalProperty
 
 plugins{
     id(BuildPlugins.android_library)
@@ -43,4 +44,8 @@ dependencies {
     implementation( fileTree( mapOf( "dir" to "libs", "include" to  listOf("*.jar")  )))
 
     implementation(BuildDependencies.kotlin)
+    implementation(BuildDependencies.retrofit)
+    implementation(BuildDependencies.retrofit_gson)
+    implementation(BuildDependencies.http_logging)
+    implementation(BuildDependencies.timber)
 }

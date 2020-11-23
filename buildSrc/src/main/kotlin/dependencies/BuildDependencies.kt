@@ -5,6 +5,10 @@ package dependencies
  */
 object BuildDependencies {
 
+    const val timber = "com.jakewharton.timber:timber:${BuildVersions.timber}"
+    const val http_logging = "com.squareup.okhttp3:logging-interceptor:${BuildVersions.http_logging}"
+    const val retrofit_gson = "com.squareup.retrofit2:converter-gson:${BuildVersions.retrofit}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${BuildVersions.retrofit}"
     const val kotlin_coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${BuildVersions.kotlin_coroutines}"
     const val kotlin_coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${BuildVersions.kotlin_coroutines}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${BuildVersions.kotlin}"

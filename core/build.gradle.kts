@@ -8,13 +8,12 @@ import BuildAndroidConfig.version_code
 import BuildAndroidConfig.version_name
 import dependencies.BuildDependencies
 import extentions.addTestsDependencies
-import extentions.getLocalProperty
 
 plugins{
     id(BuildPlugins.android_library)
     kotlin(BuildPlugins.kotlin_android)
-    kotlin(BuildPlugins.kotlin_kapt)
     kotlin(BuildPlugins.kotlin_android_extention)
+    kotlin(BuildPlugins.kotlin_kapt)
 }
 
 android {
@@ -30,29 +29,23 @@ android {
         testInstrumentationRunner = test_instrumentation_runner
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-
+    buildFeatures.dataBinding = true
 }
 
 dependencies {
-    implementation( fileTree( mapOf( "dir" to "libs", "include" to  listOf("*.jar")  )))
 
     implementation(BuildDependencies.kotlin)
+    implementation(BuildDependencies.kotlin_reflect)
     implementation(BuildDependencies.retrofit)
     implementation(BuildDependencies.retrofit_gson)
     implementation(BuildDependencies.http_logging)
     implementation(BuildDependencies.timber)
     implementation(BuildDependencies.room_db)
     implementation(BuildDependencies.room_ktx)
+    implementation(BuildDependencies.livedata_ktx)
 
     kapt(BuildDependencies.room_compiler)
 
+    // Tests
     addTestsDependencies()
 }

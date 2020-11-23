@@ -23,7 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 internal class FixerIoServiceTest {
 
     object MockResponses {
-        const val status_200 = "mock-responses/get-historical-rates-status200.json"
+        const val historical_rates_status_200 = "mock-responses/get-historical-rates-status200.json"
+        const val symbols_status_200 = "mock-responses/get-symbols-status200.json"
         const val status_404 = "mock-responses/get-historical-rates-status404.json"
     }
 
@@ -60,7 +61,7 @@ internal class FixerIoServiceTest {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson(MockResponses.status_200))
+                    .setBody(getJson(MockResponses.historical_rates_status_200))
             }
         }
 
@@ -89,7 +90,7 @@ internal class FixerIoServiceTest {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson(MockResponses.status_200))
+                    .setBody(getJson(MockResponses.historical_rates_status_200))
             }
         }
 

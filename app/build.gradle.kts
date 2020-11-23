@@ -17,9 +17,9 @@ import extentions.getLocalProperty
 
 plugins {
     id(BuildPlugins.android_application)
-    kotlin (BuildPlugins.kotlin_android)
-    kotlin(BuildPlugins.kotlin_kapt)
+    kotlin(BuildPlugins.kotlin_android)
     kotlin(BuildPlugins.kotlin_android_extention)
+    kotlin(BuildPlugins.kotlin_kapt)
 }
 
 android {

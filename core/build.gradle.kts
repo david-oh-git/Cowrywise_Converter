@@ -49,6 +49,10 @@ dependencies {
     implementation(BuildDependencies.retrofit_gson)
     implementation(BuildDependencies.http_logging)
     implementation(BuildDependencies.timber)
+    implementation(BuildDependencies.room_db)
+    implementation(BuildDependencies.room_ktx)
+
+    kapt(BuildDependencies.room_compiler)
 
     addTestsDependencies()
 }

@@ -12,6 +12,7 @@ object BuildVersions {
     const val http_logging = "4.9.0"
     const val timber = "4.7.1"
     const val navigation = "2.3.1"
+    const val room_db = "2.2.5"
 
     // Tests
     const val junit = "4.13.1"

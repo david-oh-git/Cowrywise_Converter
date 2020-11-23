@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": 404,
+    "info": "The requested resource does not exist."
+  }
+}

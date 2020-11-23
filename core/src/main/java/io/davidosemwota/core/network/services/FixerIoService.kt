@@ -30,7 +30,7 @@ interface FixerIoService {
     suspend fun getRates(
         @Query("access_key") key: String,
         @Query("base") base: String,
-        @Query("symbols") symbols: String
+        @Query("symbols", encoded = true) symbols: String
     ): RatesListResponse
 
     /**
@@ -49,7 +49,7 @@ interface FixerIoService {
         @Path("date") date: String,
         @Query("access_key") key: String,
         @Query("base") base: String,
-        @Query("symbols") symbols: String
+        @Query("symbols", encoded = true) symbols: String
     ): RatesListResponse
 
     companion object {

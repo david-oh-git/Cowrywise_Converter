@@ -7,6 +7,7 @@ import BuildAndroidConfig.test_instrumentation_runner
 import BuildAndroidConfig.version_code
 import BuildAndroidConfig.version_name
 import dependencies.BuildDependencies
+import extentions.addTestsDependencies
 import extentions.getLocalProperty
 
 plugins{
@@ -48,4 +49,6 @@ dependencies {
     implementation(BuildDependencies.retrofit_gson)
     implementation(BuildDependencies.http_logging)
     implementation(BuildDependencies.timber)
+
+    addTestsDependencies()
 }

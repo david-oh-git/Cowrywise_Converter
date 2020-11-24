@@ -2,13 +2,12 @@ package io.davidosemwota.cowrywiseconverter.convertamount
 
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.mapper.Mapper
-import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
 
 /**
  * Helper class to transform a list of [Symbol] Room entity input to a
  * list of [SymbolItem] output.
  */
-class SymbolItemMapper: Mapper<List<Symbol>, List<SymbolItem>> {
+class SymbolItemMapper : Mapper<List<Symbol>, List<SymbolItem>> {
 
     /**
      * Transforms input to desired output.
@@ -29,5 +28,4 @@ class SymbolItemMapper: Mapper<List<Symbol>, List<SymbolItem>> {
             code = from.code
         )
     }
-
 }

@@ -14,6 +14,7 @@ import dependencies.BuildDependencies.material_components
 import dependencies.BuildDependencies
 import dependencies.BuildDependencies.navigation_fragment
 import dependencies.BuildDependencies.timber
+import extentions.addTestsDependencies
 import extentions.getLocalProperty
 
 plugins {
@@ -114,4 +115,6 @@ dependencies {
         implementation(navigation_fragment)
         implementation(navigation_ui)
     }
+
+    addTestsDependencies()
 }

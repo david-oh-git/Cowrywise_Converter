@@ -6,4 +6,5 @@
     <string name="calculator">Calculator</string>
     <string name="period">.</string>
     <string name="_0_0">0.0</string>
+    <string name="spinner_item_drop_down_image_desc">Dropdown icon</string>
 </resources>

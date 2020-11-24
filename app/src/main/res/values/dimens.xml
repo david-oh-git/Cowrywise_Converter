@@ -4,4 +4,6 @@
     <dimen name="editxt_padding">10dp</dimen>
     <dimen name="dimen_edittxt_size">22sp</dimen>
     <dimen name="title_text_size">48sp</dimen>
+    <dimen name="spinner_item_padding">2dp</dimen>
+    <dimen name="spinner_item_height">32dp</dimen>
 </resources>

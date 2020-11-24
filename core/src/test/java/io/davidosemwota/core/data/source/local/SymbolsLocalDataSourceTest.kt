@@ -7,9 +7,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.utils.MainCoroutineRule
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
@@ -20,7 +19,7 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 @ExperimentalCoroutinesApi
-internal class SymbolDaoTest {
+internal class SymbolsLocalDataSourceTest {
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule
@@ -30,18 +29,21 @@ internal class SymbolDaoTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
+    private lateinit var localDataSource: SymbolsLocalDataSource
     private lateinit var database: FixerIoDatabase
-    private lateinit var symbolDao: SymbolDao
 
     @Before
     fun init() {
-        val applicationContext = ApplicationProvider.getApplicationContext<Context>()
+        val context = ApplicationProvider.getApplicationContext<Context>()
         database = Room.inMemoryDatabaseBuilder(
-            applicationContext.applicationContext,
+            context.applicationContext,
             FixerIoDatabase::class.java
         ).allowMainThreadQueries().build()
 
-        symbolDao = database.symbolDao()
+        localDataSource = SymbolsLocalDataSource(
+            database.symbolDao(),
+            Dispatchers.Main
+        )
     }
 
     @After
@@ -50,25 +52,30 @@ internal class SymbolDaoTest {
     }
 
     @Test
-    fun saveSymbol_getSymbol() = runBlockingTest {
+    fun saveSymbolItem_confirmSaved() = runBlockingTest {
         val symbol = Symbol(23L, "NGN", "Nigerian Naira")
-        symbolDao.save(symbol)
+        localDataSource.save(symbol)
 
-        val results = symbolDao.getSymbolsFlow().take(1).toList()
+        val result = localDataSource.getSymbols()
 
-        assertThat(results.size).isEqualTo(1)
+        assertThat(result.size).isEqualTo(1)
+        val item = result[0]
+        assertThat(item.name).isEqualTo(symbol.name)
+        assertThat(item.code).isEqualTo(symbol.code)
     }
 
     @Test
-    fun saveMultipleSymbolItems_confirmAllSaved() = runBlockingTest {
+    fun saveMultipleSymbolItems_confirmedSaved() = runBlockingTest {
         val nairaSymbol = Symbol(23L, "NGN", "Nigerian Naira")
         val dollarSymbol = Symbol(42L, "USD", "American Dollar")
-        symbolDao.save(nairaSymbol)
-        symbolDao.save(dollarSymbol)
+        localDataSource.save(nairaSymbol)
+        localDataSource.save(dollarSymbol)
 
-        val results = symbolDao.getSymbols()
+        val result = localDataSource.getSymbols()
 
-        assertThat(results.isEmpty()).isFalse()
-        assertThat(results.size).isEqualTo(2)
+        assertThat(result.isEmpty()).isFalse()
+        assertThat(result.size).isEqualTo(2)
+        assertThat(result).contains(nairaSymbol)
+        assertThat(result).contains(dollarSymbol)
     }
 }

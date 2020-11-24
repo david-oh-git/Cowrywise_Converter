@@ -5,6 +5,8 @@ package dependencies
  */
 object BuildDependencies {
 
+    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${BuildVersions.navigation}"
+    const val navigation_ui = "androidx.navigation:navigation-ui-ktx:${BuildVersions.navigation}"
     const val livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:${BuildVersions.lifecycle}"
     const val room_db = "androidx.room:room-runtime:${BuildVersions.room_db}"
     const val room_ktx = "androidx.room:room-ktx:${BuildVersions.room_db}"

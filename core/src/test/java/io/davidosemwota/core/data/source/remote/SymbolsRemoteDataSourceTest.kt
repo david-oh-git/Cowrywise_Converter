@@ -30,7 +30,7 @@ internal class SymbolsRemoteDataSourceTest {
     private lateinit var remoteDataSource: SymbolsDataSource
 
     @BeforeEach
-    fun init(){
+    fun init() {
         MockitoAnnotations.initMocks(this)
         mapper = SymbolListMapper()
 
@@ -42,8 +42,10 @@ internal class SymbolsRemoteDataSourceTest {
     }
 
     @Test
-    @DisplayName("When remoteDataSource getSymbols method is called , the service method " +
-            "with the same name should be called with same args")
+    @DisplayName(
+        "When remoteDataSource getSymbols method is called , the service method " +
+            "with the same name should be called with same args"
+    )
     fun getSymbols() = runBlockingTest {
         val key = "fakeKey"
         val keyArg = argumentCaptor<String>()

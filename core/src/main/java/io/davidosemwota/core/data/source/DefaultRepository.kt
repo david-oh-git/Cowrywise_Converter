@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-
 class DefaultRepository(
     private val localDataSource: SymbolsDataSource,
     private val remoteDataSource: SymbolsDataSource,
@@ -21,11 +20,11 @@ class DefaultRepository(
         return localDataSource.getSymbolsFlow()
     }
 
-    override suspend fun getSymbols(): List<Symbol>  = withContext(ioDispatcher) {
+    override suspend fun getSymbols(): List<Symbol> = withContext(ioDispatcher) {
         return@withContext localDataSource.getSymbols()
     }
 
-    override suspend fun save(symbol: Symbol)  = withContext(ioDispatcher) {
+    override suspend fun save(symbol: Symbol) = withContext(ioDispatcher) {
         localDataSource.save(symbol)
     }
 }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 internal class DefaultRepositoryTest {
 
     private val naira = Symbol(73L, "NGN", "Nigerian Naira")
-    private val dram = Symbol(22L,"AMD", "Armenian Dram")
+    private val dram = Symbol(22L, "AMD", "Armenian Dram")
     private val localSymbols = listOf(naira, dram)
 
     private val dirham = Symbol(22L, "AED", "United Arab Dirham")
@@ -25,7 +25,7 @@ internal class DefaultRepositoryTest {
     private lateinit var repository: SymbolsRepository
 
     @BeforeEach
-    fun init(){
+    fun init() {
 
         localDataSource = FakeDataSource(localSymbols.toMutableList())
         remoteDataSource = FakeDataSource(remoteSymbols.toMutableList())
@@ -38,7 +38,7 @@ internal class DefaultRepositoryTest {
     }
 
     @Test
-    fun getAllSymbolsEmptyLocalSource() = runBlockingTest{
+    fun getAllSymbolsEmptyLocalSource() = runBlockingTest {
         val emptySource = FakeDataSource()
         repository = DefaultRepository(emptySource, emptySource, Dispatchers.Unconfined)
 
@@ -48,7 +48,7 @@ internal class DefaultRepositoryTest {
     }
 
     @Test
-    fun getAllSymbolsFromLocalSource() = runBlockingTest{
+    fun getAllSymbolsFromLocalSource() = runBlockingTest {
         val result = repository.getSymbols()
 
         assertThat(result.isEmpty()).isFalse()
@@ -57,7 +57,7 @@ internal class DefaultRepositoryTest {
     }
 
     @Test
-    fun getAllSymbolsFromRemoteSource() = runBlockingTest{
+    fun getAllSymbolsFromRemoteSource() = runBlockingTest {
         val key = "FakeKey"
         val result = repository.getSymbols(key)
 
@@ -81,5 +81,4 @@ internal class DefaultRepositoryTest {
         assertThat(resultSymbol?.name).isEqualTo(cedi.name)
         assertThat(resultSymbol?.code).isEqualTo(cedi.code)
     }
-
 }

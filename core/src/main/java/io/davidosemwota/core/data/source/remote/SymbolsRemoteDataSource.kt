@@ -19,7 +19,7 @@ class SymbolsRemoteDataSource(
     /**
      * Gets a list of all available symbols from Fixer IO API.
      */
-    override suspend fun getSymbols(key: String): List<Symbol> = withContext(ioDispatcher){
+    override suspend fun getSymbols(key: String): List<Symbol> = withContext(ioDispatcher) {
         val symbolsListResponse = service.getAllSymbols(key)
         return@withContext mapper.transform(symbolsListResponse)
     }

@@ -24,6 +24,6 @@ class FakeDataSource(
     }
 
     override suspend fun save(symbol: Symbol) {
-       symbols.add(symbol)
+        symbols.add(symbol)
     }
 }

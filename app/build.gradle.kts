@@ -12,6 +12,7 @@ import dependencies.BuildDependencies.kotlin_coroutines_android
 import dependencies.BuildDependencies.kotlin_coroutines_core
 import dependencies.BuildDependencies.material_components
 import dependencies.BuildDependencies
+import dependencies.BuildDependencies.navigation_fragment
 import dependencies.BuildDependencies.timber
 import extentions.getLocalProperty
 
@@ -102,11 +103,15 @@ dependencies {
 
     implementation( project(BuildModules.CORE))
 
-    implementation(BuildDependencies.kotlin)
-    implementation(app_compat)
-    implementation(material_components)
-    implementation(constraints_layout)
-    implementation(kotlin_coroutines_android)
-    implementation(kotlin_coroutines_core)
-    implementation(timber)
+    BuildDependencies.run {
+        implementation(kotlin)
+        implementation(app_compat)
+        implementation(material_components)
+        implementation(constraints_layout)
+        implementation(kotlin_coroutines_android)
+        implementation(kotlin_coroutines_core)
+        implementation(timber)
+        implementation(navigation_fragment)
+        implementation(navigation_ui)
+    }
 }

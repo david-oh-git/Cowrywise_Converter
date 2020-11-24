@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
 import io.davidosemwota.core.data.Symbol
+import io.davidosemwota.core.data.source.SymbolsDataSource
 import io.davidosemwota.core.utils.MainCoroutineRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,7 +30,7 @@ internal class SymbolsLocalDataSourceTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    private lateinit var localDataSource: SymbolsLocalDataSource
+    private lateinit var localDataSource: SymbolsDataSource
     private lateinit var database: FixerIoDatabase
 
     @Before

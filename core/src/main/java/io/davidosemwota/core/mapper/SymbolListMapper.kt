@@ -15,17 +15,17 @@ class SymbolListMapper : Mapper<SymbolsListResponse, List<Symbol>> {
      * @return A characterDetail(parceble version) class
      */
     override suspend fun transform(from: SymbolsListResponse): List<Symbol> {
-        return when(from.symbols){
+        return when (from.symbols) {
             null -> emptyList()
             else -> mapToList(from.symbols.data)
         }
     }
 
-    private fun mapToList(data: Map<String, String>) : List<Symbol> {
+    private fun mapToList(data: Map<String, String>): List<Symbol> {
         val listOfSymbols = mutableListOf<Symbol>()
 
-        for( (key, value) in data){
-            val symbol = Symbol(0,key, value)
+        for ((key, value) in data) {
+            val symbol = Symbol(0, key, value)
             listOfSymbols.add(symbol)
         }
         return listOfSymbols

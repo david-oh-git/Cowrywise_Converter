@@ -14,6 +14,7 @@ object BuildVersions {
     const val navigation = "2.3.1"
     const val room_db = "2.2.5"
     const val lifecycle = "2.2.0"
+    const val material_spinner = "1.3.1"
 
     // Tests
     const val junit = "4.13.1"

@@ -5,6 +5,7 @@ package dependencies
  */
 object BuildDependencies {
 
+    const val material_spinner = "com.jaredrummler:material-spinner:${BuildVersions.material_spinner}"
     const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${BuildVersions.navigation}"
     const val navigation_ui = "androidx.navigation:navigation-ui-ktx:${BuildVersions.navigation}"
     const val livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:${BuildVersions.lifecycle}"

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Cowrywise Converter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="currency">Currency</string>
+    <string name="calculator">Calculator</string>
+    <string name="period">.</string>
+    <string name="_0_0">0.0</string>
 </resources>

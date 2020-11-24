@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav_graph">
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/convertAmountFragment">
 
+    <fragment
+        android:id="@+id/convertAmountFragment"
+        tools:layout="@layout/fragment_convert_amount"
+        android:name="io.davidosemwota.cowrywiseconverter.convertamount.ConvertAmountFragment"
+        android:label="ConvertAmountFragment" />
 </navigation>

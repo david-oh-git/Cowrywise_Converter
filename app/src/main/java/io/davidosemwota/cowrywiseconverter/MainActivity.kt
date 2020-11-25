@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val key = BuildConfig.FIXER_API_KEY
-
         }
     }
 }

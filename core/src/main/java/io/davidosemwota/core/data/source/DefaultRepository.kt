@@ -1,6 +1,5 @@
 package io.davidosemwota.core.data.source
 
-import android.content.SharedPreferences
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -25,7 +24,7 @@ class DefaultRepository(
     private val TO_PREFERENCE_KEY = preferencesKey<String>(TO_CODE_KEY)
 
     val fromCode: Flow<String>
-        get() = dataStore.data.map {  preferences ->
+        get() = dataStore.data.map { preferences ->
             preferences[ FROM_PREFERENCE_KEY ] ?: "NGN"
         }
 

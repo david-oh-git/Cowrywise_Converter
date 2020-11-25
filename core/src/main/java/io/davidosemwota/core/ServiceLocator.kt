@@ -20,7 +20,7 @@ object ServiceLocator {
     var repository: SymbolsRepository? = null
 
     fun provideRepository(context: Context): SymbolsRepository {
-        synchronized(this){
+        synchronized(this) {
             return repository ?: createRepository(context)
         }
     }

@@ -30,10 +30,10 @@ class SymbolListViewModel(
     val listOfSymbols: LiveData<List<SymbolItem>> =
         Transformations.switchMap(searchQuery) { query ->
 
-        Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbols ->
-            searchSymbols(query, symbols)
+            Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbols ->
+                searchSymbols(query, symbols)
+            }
         }
-    }
 
     val _state: MutableLiveData<SymbolListViewState> = MutableLiveData(SymbolListViewState.Loading)
     val state: LiveData<SymbolListViewState> = _state

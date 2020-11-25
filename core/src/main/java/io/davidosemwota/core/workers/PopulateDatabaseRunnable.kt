@@ -17,7 +17,7 @@ class PopulateDatabaseRunnable(
         populateDatabaseWithSymbols(context)
     }
 
-    private fun populateDatabaseWithSymbols(context: Context){
+    private fun populateDatabaseWithSymbols(context: Context) {
         val key = BuildConfig.FIXER_API_KEY
 
         GlobalScope.launch(Dispatchers.IO) {
@@ -29,6 +29,5 @@ class PopulateDatabaseRunnable(
 
             symbols.forEach { repository.save(it) }
         }
-
     }
 }

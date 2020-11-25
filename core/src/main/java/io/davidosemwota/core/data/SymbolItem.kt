@@ -9,6 +9,6 @@ package io.davidosemwota.core.data
 data class SymbolItem(
     val code: String,
     val name: String
-){
+) {
     val displaySymbolName = "$name $code"
 }

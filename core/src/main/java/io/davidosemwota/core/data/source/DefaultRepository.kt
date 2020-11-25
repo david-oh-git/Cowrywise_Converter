@@ -46,11 +46,9 @@ class DefaultRepository(
     }
 
     override suspend fun setFromCode(code: String) {
-
     }
 
     override suspend fun setToCode(code: String) {
-
     }
 
     override suspend fun save(key: String, code: String) {
@@ -72,5 +70,4 @@ class DefaultRepository(
             }
         }
     }
-
 }

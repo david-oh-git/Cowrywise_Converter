@@ -19,7 +19,7 @@ class ConvertAmountFragment : Fragment() {
     private lateinit var binding: FragmentConvertAmountBinding
     private val viewModel: ConvertAmountViewModel by viewModels {
         ConvertAmountViewModelFactory(
-            ( requireContext().applicationContext as ConverterApp ).repository
+            (requireContext().applicationContext as ConverterApp).repository
         )
     }
 

@@ -9,11 +9,10 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import io.davidosemwota.core.data.Symbol
+import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.core.data.source.SymbolsRepository
 import io.davidosemwota.core.mapper.Mapper
-import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.core.utils.SingleLiveData
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -33,15 +32,15 @@ class SymbolListViewModel(
 
     val listOfSymbols = Transformations.switchMap(searchQuery) { query ->
 
-            Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbolsList ->
-                searchSymbols(query, symbolsList)
-            }
+        Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbolsList ->
+            searchSymbols(query, symbolsList)
         }
+    }
 
     private val _state = MutableLiveData<SymbolListViewState>()
     val state = Transformations.map(symbols) {
 
-        when{
+        when {
             it.isNotEmpty() -> SymbolListViewState.Loaded
             it.isEmpty() -> SymbolListViewState.Loaded
             else -> SymbolListViewState.Loading
@@ -50,8 +49,8 @@ class SymbolListViewModel(
 
     val event = SingleLiveData<SymbolListViewEvent>()
 
-    fun saveSymbolCodeAndCloseSymbolListFragment(code: String){
-        event.postValue( SymbolListViewEvent.SaveSymbolCodeAndClose(code))
+    fun saveSymbolCodeAndCloseSymbolListFragment(code: String) {
+        event.postValue(SymbolListViewEvent.SaveSymbolCodeAndClose(code))
         Timber.d("I was clicked !!")
     }
 
@@ -68,7 +67,7 @@ class SymbolListViewModel(
     private fun searchSymbols(query: String?, symbols: List<Symbol>): LiveData<List<SymbolItem>> {
         var symbolItems: List<SymbolItem> = mutableListOf()
         viewModelScope.launch {
-            symbolItems =  symbolListMapper.transform(symbols)
+            symbolItems = symbolListMapper.transform(symbols)
         }
         if (query.isNullOrEmpty() || query.isBlank()) {
             return MutableLiveData(symbolItems)
@@ -83,10 +82,10 @@ class SymbolListViewModel(
 //        }
 
         val newItems = mutableListOf<SymbolItem>()
-        for( symbolItem in symbolItems ){
-            if( query.contains(query, ignoreCase = true) ||
+        for (symbolItem in symbolItems) {
+            if (query.contains(query, ignoreCase = true) ||
                 query.contains(query, ignoreCase = true)
-            ){
+            ) {
                 newItems.add(symbolItem)
             }
         }

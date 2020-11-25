@@ -24,7 +24,7 @@ class SymbolListFragment : Fragment() {
     private lateinit var binding: FragmentSymbolListBinding
     private val viewModel: SymbolListViewModel by viewModels {
         SymbolListViewModelFactory(
-            ( requireContext().applicationContext as ConverterApp).repository,
+            (requireContext().applicationContext as ConverterApp).repository,
             SymbolItemMapper()
         )
     }
@@ -67,9 +67,9 @@ class SymbolListFragment : Fragment() {
         Timber.d("State is ${viewModel.state.value}")
     }
 
-    private fun onViewEvent(viewEvent: SymbolListViewEvent){
+    private fun onViewEvent(viewEvent: SymbolListViewEvent) {
 
-        when(viewEvent){
+        when (viewEvent) {
             is SymbolListViewEvent.SaveSymbolCodeAndClose -> {
                 viewModel.save(fragmentTypeCode, viewEvent.code)
                 findNavController().popBackStack()

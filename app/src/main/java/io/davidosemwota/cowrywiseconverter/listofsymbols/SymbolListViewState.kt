@@ -11,5 +11,4 @@ sealed class SymbolListViewState : BaseViewState {
     fun isLoading() = this is Loading
 
     fun isLoaded() = this is Loaded
-
 }

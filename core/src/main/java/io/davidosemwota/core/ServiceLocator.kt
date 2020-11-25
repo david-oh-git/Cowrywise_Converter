@@ -1,7 +1,6 @@
 package io.davidosemwota.core
 
 import android.content.Context
-import androidx.datastore.preferences.createDataStore
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import io.davidosemwota.core.data.source.DefaultRepository
@@ -12,7 +11,6 @@ import io.davidosemwota.core.data.source.local.SymbolsLocalDataSource
 import io.davidosemwota.core.data.source.remote.SymbolsRemoteDataSource
 import io.davidosemwota.core.mapper.SymbolListMapper
 import io.davidosemwota.core.network.FixerIoApiFactory
-import io.davidosemwota.core.utils.PREFERENCES_FILE_NAME
 import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
 import io.davidosemwota.core.workers.PopulateDatabaseRunnable
 import kotlinx.coroutines.Dispatchers
@@ -68,7 +66,7 @@ object ServiceLocator {
         return result
     }
 
-    fun firstTimePopulateDatabaseWithCurrencySymbols(context: Context){
-        Thread( PopulateDatabaseRunnable(context.applicationContext)).apply { start() }
+    fun firstTimePopulateDatabaseWithCurrencySymbols(context: Context) {
+        Thread(PopulateDatabaseRunnable(context.applicationContext)).apply { start() }
     }
 }

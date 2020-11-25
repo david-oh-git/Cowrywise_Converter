@@ -26,10 +26,7 @@ package io.davidosemwota.cowrywiseconverter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.davidosemwota.core.ServiceLocator
-import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
 import io.davidosemwota.cowrywiseconverter.databinding.ActivityMainBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,10 +36,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 //        firstTimeDatabasePreload()
-
     }
 
-    private fun firstTimeDatabasePreload(){
+    private fun firstTimeDatabasePreload() {
         ServiceLocator.firstTimePopulateDatabaseWithCurrencySymbols(applicationContext)
     }
 }

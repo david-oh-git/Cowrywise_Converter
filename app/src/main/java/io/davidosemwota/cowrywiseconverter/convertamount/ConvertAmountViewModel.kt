@@ -1,6 +1,5 @@
 package io.davidosemwota.cowrywiseconverter.convertamount
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.collect
 
 class ConvertAmountViewModel(
     private val repository: SymbolsRepository
-) :ViewModel() {
+) : ViewModel() {
 
     val fromCode = liveData {
         repository.fromCode.collect {
@@ -22,7 +21,6 @@ class ConvertAmountViewModel(
             emit(it)
         }
     }
-
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -31,5 +29,5 @@ class ConvertAmountViewModelFactory(
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        ( ConvertAmountViewModel(repository)) as T
+        (ConvertAmountViewModel(repository)) as T
 }

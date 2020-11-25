@@ -10,5 +10,22 @@
         android:id="@+id/convertAmountFragment"
         tools:layout="@layout/fragment_convert_amount"
         android:name="io.davidosemwota.cowrywiseconverter.convertamount.ConvertAmountFragment"
-        android:label="ConvertAmountFragment" />
+        android:label="ConvertAmountFragment" >
+        <action
+            android:id="@+id/action_convertAmountFragment_to_symbolListFragment"
+            app:destination="@id/symbolListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/symbolListFragment"
+        tools:layout="@layout/fragment_symbol_list"
+        android:name="io.davidosemwota.cowrywiseconverter.listofsymbols.SymbolListFragment"
+        android:label="SymbolListFragment" >
+
+        <argument
+            android:name="fragment_type"
+            app:argType="string" />
+
+    </fragment>
+
 </navigation>

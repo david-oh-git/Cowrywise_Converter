@@ -13,7 +13,7 @@
 
     <RelativeLayout
         android:id="@+id/spinner_item_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/spinner_item_height">
 
         <com.google.android.material.imageview.ShapeableImageView

@@ -22,6 +22,7 @@ plugins {
     kotlin(BuildPlugins.kotlin_android)
     kotlin(BuildPlugins.kotlin_android_extention)
     kotlin(BuildPlugins.kotlin_kapt)
+    id(BuildPlugins.navigation_safe_args)
 }
 
 android {

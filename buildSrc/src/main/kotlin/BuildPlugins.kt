@@ -7,6 +7,7 @@ object BuildPlugins {
     const val spotless = "plugins.spotless"
     const val ktlint = "plugins.ktlint"
     const val git_hooks = "plugins.git-hooks"
+    const val navigation_safe_args = "androidx.navigation.safeargs.kotlin"
 
     const val kotlin_kapt = "kapt"
     const val kotlin_android = "android"

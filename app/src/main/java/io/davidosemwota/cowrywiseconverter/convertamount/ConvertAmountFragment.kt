@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.davidosemwota.cowrywiseconverter.R
+import io.davidosemwota.cowrywiseconverter.databinding.FragmentConvertAmountBinding
 
 /**
  */
@@ -17,6 +18,7 @@ class ConvertAmountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_convert_amount, container, false)
+        val binding = FragmentConvertAmountBinding.inflate(inflater)
+        return binding.root
     }
 }

@@ -15,7 +15,7 @@ class SpinnerItemHolder(
     /**
      * Bind data variables for viewHolder.
      */
-    fun bind(symbolItem: SymbolItem){
+    fun bind(symbolItem: SymbolItem) {
         binding.apply {
             symbolItemCode.text = symbolItem.code
             executePendingBindings()

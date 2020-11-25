@@ -29,4 +29,14 @@ interface SymbolsRepository {
      * Save a [Symbol] item to the database.
      */
     suspend fun save(symbol: Symbol)
+
+    /**
+     * Set from Symbol code
+     */
+    suspend fun setFromCode(code: String)
+
+    /**
+     * Set to Symbol code
+     */
+    suspend fun setToCode(code: String)
 }

@@ -115,6 +115,7 @@ dependencies {
         implementation(timber)
         implementation(navigation_fragment)
         implementation(navigation_ui)
+        implementation(livedata_ktx)
     }
 
     addTestsDependencies()

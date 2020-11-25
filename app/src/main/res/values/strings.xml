@@ -9,4 +9,5 @@
     <string name="spinner_item_drop_down_image_desc">Dropdown icon</string>
     <string name="search_currency_hint">Search here</string>
     <string name="list_of_a_currencies">List of symbols</string>
+    <string name="framgent_covert_btn">Convert</string>
 </resources>

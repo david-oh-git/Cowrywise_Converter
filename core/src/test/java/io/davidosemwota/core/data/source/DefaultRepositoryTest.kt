@@ -1,5 +1,7 @@
 package io.davidosemwota.core.data.source
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.google.common.truth.Truth.assertThat
 import io.davidosemwota.core.data.Symbol
 import kotlinx.coroutines.Dispatchers
@@ -7,6 +9,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
 internal class DefaultRepositoryTest {
@@ -22,25 +26,29 @@ internal class DefaultRepositoryTest {
     private lateinit var localDataSource: SymbolsDataSource
     private lateinit var remoteDataSource: SymbolsDataSource
 
+    @Mock
+    lateinit var dataStore: DataStore<Preferences>
+
     private lateinit var repository: SymbolsRepository
 
     @BeforeEach
     fun init() {
-
+        MockitoAnnotations.initMocks(this)
         localDataSource = FakeDataSource(localSymbols.toMutableList())
         remoteDataSource = FakeDataSource(remoteSymbols.toMutableList())
 
         repository = DefaultRepository(
             localDataSource = localDataSource,
             remoteDataSource = remoteDataSource,
-            ioDispatcher = Dispatchers.Unconfined
+            ioDispatcher = Dispatchers.Unconfined,
+            dataStore
         )
     }
 
     @Test
     fun getAllSymbolsEmptyLocalSource() = runBlockingTest {
         val emptySource = FakeDataSource()
-        repository = DefaultRepository(emptySource, emptySource, Dispatchers.Unconfined)
+        repository = DefaultRepository(emptySource, emptySource, Dispatchers.Unconfined, dataStore)
 
         val result = repository.getSymbols()
 

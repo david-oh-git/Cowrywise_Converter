@@ -5,6 +5,9 @@ package dependencies
  */
 object BuildDependencies {
 
+    const val recycler_view = "androidx.recyclerview:recyclerview:${BuildVersions.recycler_view}"
+    const val data_store = "androidx.datastore:datastore-preferences:${BuildVersions.data_store}"
+    const val preference = "androidx.preference:preference-ktx:${BuildVersions.preference}"
     const val material_spinner = "com.jaredrummler:material-spinner:${BuildVersions.material_spinner}"
     const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${BuildVersions.navigation}"
     const val navigation_ui = "androidx.navigation:navigation-ui-ktx:${BuildVersions.navigation}"

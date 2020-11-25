@@ -29,22 +29,36 @@ android {
         testInstrumentationRunner = test_instrumentation_runner
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildFeatures.dataBinding = true
+
 }
 
 dependencies {
 
-    implementation(BuildDependencies.kotlin)
-    implementation(BuildDependencies.kotlin_reflect)
-    implementation(BuildDependencies.retrofit)
-    implementation(BuildDependencies.retrofit_gson)
-    implementation(BuildDependencies.http_logging)
-    implementation(BuildDependencies.timber)
-    implementation(BuildDependencies.room_db)
-    implementation(BuildDependencies.room_ktx)
-    implementation(BuildDependencies.livedata_ktx)
+    BuildDependencies.run {
+        implementation(kotlin)
+        implementation(kotlin_reflect)
+        implementation(retrofit)
+        implementation(retrofit_gson)
+        implementation(http_logging)
+        implementation(timber)
+        implementation(room_db)
+        implementation(room_ktx)
+        implementation(livedata_ktx)
+        implementation(data_store)
+        implementation(recycler_view)
 
-    kapt(BuildDependencies.room_compiler)
+        kapt(room_compiler)
+    }
 
     // Tests
     addTestsDependencies()

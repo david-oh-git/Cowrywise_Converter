@@ -2,7 +2,7 @@ package io.davidosemwota.cowrywiseconverter.convertamount.adaptors
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import io.davidosemwota.cowrywiseconverter.convertamount.SymbolItem
+import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.cowrywiseconverter.databinding.SymbolItemBinding
 
 /**

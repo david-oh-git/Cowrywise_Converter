@@ -1,37 +1,33 @@
 package io.davidosemwota.core.data.source
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.preferencesKey
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.utils.FROM_CODE_KEY
 import io.davidosemwota.core.utils.TO_CODE_KEY
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
+@ExperimentalCoroutinesApi
 class DefaultRepository(
     private val localDataSource: SymbolsDataSource,
     private val remoteDataSource: SymbolsDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val dataStore: DataStore<Preferences>
+    private val sharedPreferences: SharedPreferences
 ) : SymbolsRepository {
 
-    private val FROM_PREFERENCE_KEY = preferencesKey<String>(FROM_CODE_KEY)
-    private val TO_PREFERENCE_KEY = preferencesKey<String>(TO_CODE_KEY)
+    override val fromCode = MutableStateFlow(
+        sharedPreferences.getString(FROM_CODE_KEY, "NGN") ?: "NGN"
+    )
 
-    val fromCode: Flow<String>
-        get() = dataStore.data.map { preferences ->
-            preferences[ FROM_PREFERENCE_KEY ] ?: "NGN"
-        }
-
-    val toCode: Flow<String>
-        get() = dataStore.data.map { preferences ->
-            preferences[TO_PREFERENCE_KEY] ?: "USD"
-        }
+    override val toCode: MutableStateFlow<String> = MutableStateFlow(
+        sharedPreferences.getString(TO_CODE_KEY, "USD") ?: "USD"
+    )
 
     override suspend fun getSymbols(key: String): List<Symbol> = withContext(ioDispatcher) {
         return@withContext remoteDataSource.getSymbols(key)
@@ -50,14 +46,31 @@ class DefaultRepository(
     }
 
     override suspend fun setFromCode(code: String) {
-        dataStore.edit { preferences ->
-            preferences[FROM_PREFERENCE_KEY] = code
-        }
+
     }
 
     override suspend fun setToCode(code: String) {
-        dataStore.edit { preferences ->
-            preferences[TO_PREFERENCE_KEY] = code
+
+    }
+
+    override suspend fun save(key: String, code: String) {
+        Timber.d("About to save $key")
+        when (key) {
+            FROM_CODE_KEY -> {
+                sharedPreferences.edit {
+                    putString(FROM_CODE_KEY, code)
+                }
+
+                fromCode.value = code
+            }
+            TO_CODE_KEY -> {
+                sharedPreferences.edit {
+                    putString(TO_CODE_KEY, code)
+                }
+
+                toCode.value = code
+            }
         }
     }
+
 }

@@ -6,51 +6,48 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="io.davidosemwota.cowrywiseconverter.listofsymbols.SymbolListViewModel" />
+
+        <variable
             name="symbolItem"
-            type="io.davidosemwota.cowrywiseconverter.convertamount.SymbolItem" />
+            type="io.davidosemwota.core.data.SymbolItem" />
 
     </data>
 
-    <RelativeLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/spinner_item_container"
+        android:elevation="8dp"
+        app:cardCornerRadius="4dp"
+        android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spinner_item_height">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image"
-            app:shapeAppearanceOverlay="@style/CircleImageView"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:src="@android:color/holo_purple"
-            android:paddingStart="@dimen/spinner_item_padding"
-            android:paddingEnd="@dimen/spinner_item_padding"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@id/symbol_item_code"
-            android:layout_alignBottom="@id/symbol_item_code"
-            android:layout_width="@dimen/spinner_item_height"
-            android:layout_height="@dimen/spinner_item_height" />
+        <LinearLayout
+            android:onClick="@{ () -> viewModel.saveSymbolCodeAndCloseSymbolListFragment(symbolItem.code) }"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/symbol_item_code"
-            tools:text="GHS"
-            android:text="@{ symbolItem.name }"
-            android:textStyle="bold"
-            android:fontFamily="@font/montserrat"
-            android:textSize="@dimen/dimen_edittxt_size"
-            android:layout_toEndOf="@id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/symbol_item_code"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="GHS"
+                android:text="@{ symbolItem.displaySymbolName }"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/dimen_edittxt_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/drop_down_icon"
-            android:contentDescription="@string/spinner_item_drop_down_image_desc"
-            android:src="@drawable/ic_arrow_down"
-            android:layout_alignTop="@id/symbol_item_code"
-            android:layout_alignBottom="@id/symbol_item_code"
-            android:layout_toEndOf="@id/symbol_item_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        </LinearLayout>
 
-    </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

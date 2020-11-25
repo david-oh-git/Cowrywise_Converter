@@ -21,28 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.davidosemwota.cowrywiseconverter
+package io.davidosemwota.cowrywiseconverter.bindings
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import io.davidosemwota.core.ServiceLocator
-import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
-import io.davidosemwota.cowrywiseconverter.databinding.ActivityMainBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import android.widget.ListView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+/**
+ * Get implementation manager that lays out items in a grid.
+ *
+ * @return Recycle view grid layout manager if configured, otherwise null.
+ */
+val RecyclerView.gridLayoutManager: GridLayoutManager?
+    get() = layoutManager as? GridLayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-//        firstTimeDatabasePreload()
-
-    }
-
-    private fun firstTimeDatabasePreload(){
-        ServiceLocator.firstTimePopulateDatabaseWithCurrencySymbols(applicationContext)
-    }
-}
+/**
+ * Get implementation manager which provides similar functionality [ListView].
+ *
+ * @return Recycle view linear layout manager if configured, otherwise null.
+ */
+val RecyclerView.linearLayoutManager: LinearLayoutManager?
+    get() = layoutManager as? LinearLayoutManager

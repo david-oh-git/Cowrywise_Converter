@@ -5,6 +5,8 @@
     <dimen name="dimen_edittxt_size">22sp</dimen>
     <dimen name="title_text_size">48sp</dimen>
     <dimen name="spinner_item_padding">2dp</dimen>
-    <dimen name="spinner_item_height">32dp</dimen>
+    <dimen name="spinner_item_height">64dp</dimen>
     <dimen name="characters_list_loading_size">50dp</dimen>
+
+    <dimen name="symbol_item_list_item_padding">6dp</dimen>
 </resources>

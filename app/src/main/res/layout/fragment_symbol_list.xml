@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="io.davidosemwota.cowrywiseconverter.listofsymbols.SymbolListViewModel" />
     </data>
 
@@ -20,12 +20,12 @@
         <include
             android:id="@+id/include_symbol_list"
             layout="@layout/view_symbols_list"
-            app:viewModel="@{ viewModel }" />
+            app:viewModel="@{ vm }" />
 
         <include
             android:id="@+id/include_symbol_list_error"
             layout="@layout/view_symbols_list_error"
-            app:viewState="@{ viewModel.state }" />
+            app:viewState="@{ vm.state }" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

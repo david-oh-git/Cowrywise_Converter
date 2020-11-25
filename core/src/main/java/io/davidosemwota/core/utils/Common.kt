@@ -6,7 +6,9 @@ package io.davidosemwota.core.utils
 
 const val SYMBOL_TABLE_NAME = "symbol_table"
 
-const val SYMBOL_FILE_NAME = "io.davidosemwota.core.utils.app_database.db"
+const val SYMBOL_FILE_NAME = "app_database.db"
+
+const val PREFERENCES_FILE_NAME = "data_store"
 
 const val DATABASE_VERSION = 1
 

@@ -7,62 +7,98 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.data.source.SymbolsRepository
 import io.davidosemwota.core.mapper.Mapper
-import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
-import io.davidosemwota.cowrywiseconverter.convertamount.SymbolItem
+import io.davidosemwota.core.data.SymbolItem
+import io.davidosemwota.core.utils.SingleLiveData
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SymbolListViewModel(
     private val repository: SymbolsRepository,
-    private val symbolListMapper: Mapper<SymbolsListResponse, List<Symbol>>
+    private val symbolListMapper: Mapper<List<Symbol>, List<SymbolItem>>
 ) : ViewModel() {
 
     val searchQuery = MutableLiveData<String>().apply { value = "" }
-    private val symbols = liveData {
+    val symbols = liveData {
         repository.getSymbolsFlow()
             .collect {
-                emit(it)
+                emit(symbolListMapper.transform(it))
             }
     }
 
-    val listOfSymbols: LiveData<List<SymbolItem>> =
-        Transformations.switchMap(searchQuery) { query ->
+    val listOfSymbols = Transformations.switchMap(searchQuery) { query ->
 
-            Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbols ->
-                searchSymbols(query, symbols)
+            Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbolsList ->
+                searchSymbols(query, symbolsList)
             }
         }
 
-    val _state: MutableLiveData<SymbolListViewState> = MutableLiveData(SymbolListViewState.Loading)
-    val state: LiveData<SymbolListViewState> = _state
+    private val _state = MutableLiveData<SymbolListViewState>()
+    val state = Transformations.map(symbols) {
+
+        when{
+            it.isNotEmpty() -> SymbolListViewState.Loaded
+            it.isEmpty() -> SymbolListViewState.Loaded
+            else -> SymbolListViewState.Loading
+        }
+    }
+
+    val event = SingleLiveData<SymbolListViewEvent>()
+
+    fun saveSymbolCodeAndCloseSymbolListFragment(code: String){
+        event.postValue( SymbolListViewEvent.SaveSymbolCodeAndClose(code))
+        Timber.d("I was clicked !!")
+    }
+
+    fun save(key: String, code: String) = viewModelScope.launch {
+        repository.save(key, code)
+    }
 
     fun setState(state: SymbolListViewState) {
         _state.postValue(state)
+
+        Timber.d("State set to ${_state.value}")
     }
 
-    private fun searchSymbols(query: String, symbols: List<Symbol>): LiveData<List<SymbolItem>> {
-
-        if (query.isEmpty() || query.isBlank()) {
-            return MutableLiveData(emptyList())
+    private fun searchSymbols(query: String?, symbols: List<Symbol>): LiveData<List<SymbolItem>> {
+        var symbolItems: List<SymbolItem> = mutableListOf()
+        viewModelScope.launch {
+            symbolItems =  symbolListMapper.transform(symbols)
         }
-        val searchSymbols = symbols.filter {
-            it.name.contains(
-                query, ignoreCase = true
-            ) || it.code.contains(
-                query, ignoreCase = true
-            )
-        }.map { SymbolItem(code = it.code, name = it.name) }
+        if (query.isNullOrEmpty() || query.isBlank()) {
+            return MutableLiveData(symbolItems)
+        }
 
-        return MutableLiveData(searchSymbols)
+//        val searchSymbols = symbolItems.filter {
+//            it.name.contains(
+//                query, ignoreCase = true
+//            ) || it.code.contains(
+//                query, ignoreCase = true
+//            )
+//        }
+
+        val newItems = mutableListOf<SymbolItem>()
+        for( symbolItem in symbolItems ){
+            if( query.contains(query, ignoreCase = true) ||
+                query.contains(query, ignoreCase = true)
+            ){
+                newItems.add(symbolItem)
+            }
+        }
+
+        return MutableLiveData(newItems)
     }
 }
 
 @Suppress("UNCHECKED_CAST")
 class SymbolListViewModelFactory(
     private val repository: SymbolsRepository,
-    private val symbolListMapper: Mapper<SymbolsListResponse, List<Symbol>>
+    private val symbolListMapper: Mapper<List<Symbol>, List<SymbolItem>>
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =

@@ -1,4 +1,4 @@
-package io.davidosemwota.cowrywiseconverter.convertamount
+package io.davidosemwota.core.data
 
 /**
  * Represents an item in the spinner.
@@ -9,4 +9,6 @@ package io.davidosemwota.cowrywiseconverter.convertamount
 data class SymbolItem(
     val code: String,
     val name: String
-)
+){
+    val displaySymbolName = "$name $code"
+}

@@ -6,13 +6,10 @@ sealed class SymbolListViewState : BaseViewState {
 
     object Loading : SymbolListViewState()
 
-    object LoadedFromSymbol : SymbolListViewState()
-
-    object LoadedToSymbol : SymbolListViewState()
+    object Loaded : SymbolListViewState()
 
     fun isLoading() = this is Loading
 
-    fun isLoadedFrom() = this is LoadedFromSymbol
+    fun isLoaded() = this is Loaded
 
-    fun isLoadedTo() = this is LoadedToSymbol
 }

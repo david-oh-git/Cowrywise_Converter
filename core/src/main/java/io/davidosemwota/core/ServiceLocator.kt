@@ -2,6 +2,7 @@ package io.davidosemwota.core
 
 import android.content.Context
 import androidx.datastore.preferences.createDataStore
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import io.davidosemwota.core.data.source.DefaultRepository
 import io.davidosemwota.core.data.source.SymbolsDataSource
@@ -11,7 +12,9 @@ import io.davidosemwota.core.data.source.local.SymbolsLocalDataSource
 import io.davidosemwota.core.data.source.remote.SymbolsRemoteDataSource
 import io.davidosemwota.core.mapper.SymbolListMapper
 import io.davidosemwota.core.network.FixerIoApiFactory
+import io.davidosemwota.core.utils.PREFERENCES_FILE_NAME
 import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
+import io.davidosemwota.core.workers.PopulateDatabaseRunnable
 import kotlinx.coroutines.Dispatchers
 
 object ServiceLocator {
@@ -26,11 +29,13 @@ object ServiceLocator {
     }
 
     private fun createRepository(context: Context): SymbolsRepository {
+
+        PreferenceManager.getDefaultSharedPreferences(context)
         val newRepo = DefaultRepository(
             localDataSource = createLocalDataSource(context),
             remoteDataSource = createRemoteDataSource(),
             Dispatchers.IO,
-            context.applicationContext.createDataStore(SYMBOL_FILE_NAME)
+            PreferenceManager.getDefaultSharedPreferences(context)
         )
 
         repository = newRepo
@@ -61,5 +66,9 @@ object ServiceLocator {
         database = result
 
         return result
+    }
+
+    fun firstTimePopulateDatabaseWithCurrencySymbols(context: Context){
+        Thread( PopulateDatabaseRunnable(context.applicationContext)).apply { start() }
     }
 }

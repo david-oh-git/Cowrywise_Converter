@@ -8,6 +8,7 @@ import BuildAndroidConfig.version_code
 import BuildAndroidConfig.version_name
 import dependencies.BuildDependencies
 import extentions.addTestsDependencies
+import extentions.getLocalProperty
 
 plugins{
     id(BuildPlugins.android_library)
@@ -40,6 +41,19 @@ android {
 
     buildFeatures.dataBinding = true
 
+    buildTypes.forEach {
+        try{
+            it.buildConfigField(
+                "String",
+                "FIXER_API_KEY",
+                getLocalProperty("fixer.access.key")
+            )
+        }catch (e: Exception){
+            throw InvalidUserDataException("Define fixer.io API access key in local.properties " +
+                    "file as 'fixer.access.key'. Visit https://fixer.io to get keys ")
+        }
+    }
+
 }
 
 dependencies {
@@ -56,6 +70,7 @@ dependencies {
         implementation(livedata_ktx)
         implementation(data_store)
         implementation(recycler_view)
+        implementation(preference)
 
         kapt(room_compiler)
     }

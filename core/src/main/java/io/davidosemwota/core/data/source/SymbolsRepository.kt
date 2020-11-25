@@ -2,6 +2,7 @@ package io.davidosemwota.core.data.source
 
 import io.davidosemwota.core.data.Symbol
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  *  Symbol repository.
@@ -9,6 +10,16 @@ import kotlinx.coroutines.flow.Flow
  *  Handles data operations
  */
 interface SymbolsRepository {
+
+    /**
+     * Currency symbol code converting from.
+     */
+    val fromCode: MutableStateFlow<String>
+
+    /**
+     * Currency symbol code converting to.
+     */
+    val toCode: MutableStateFlow<String>
 
     /**
      * Get a list of all currency [Symbol] from Fixer IO API.
@@ -39,4 +50,9 @@ interface SymbolsRepository {
      * Set to Symbol code
      */
     suspend fun setToCode(code: String)
+
+    /**
+     * Save symbol code to data store.
+     */
+    suspend fun save(key: String, code: String)
 }

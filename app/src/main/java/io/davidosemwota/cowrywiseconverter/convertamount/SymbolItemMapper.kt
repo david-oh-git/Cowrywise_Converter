@@ -1,6 +1,7 @@
 package io.davidosemwota.cowrywiseconverter.convertamount
 
 import io.davidosemwota.core.data.Symbol
+import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.core.mapper.Mapper
 
 /**

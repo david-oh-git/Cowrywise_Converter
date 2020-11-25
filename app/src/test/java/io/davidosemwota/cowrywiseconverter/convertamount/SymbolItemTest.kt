@@ -1,6 +1,7 @@
 package io.davidosemwota.cowrywiseconverter.convertamount
 
 import com.google.common.truth.Truth.assertThat
+import io.davidosemwota.core.data.SymbolItem
 import org.junit.jupiter.api.Test
 
 internal class SymbolItemTest {

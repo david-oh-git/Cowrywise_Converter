@@ -3,7 +3,7 @@ package io.davidosemwota.cowrywiseconverter.convertamount.adaptors
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import io.davidosemwota.cowrywiseconverter.convertamount.SymbolItem
+import io.davidosemwota.core.data.SymbolItem
 
 class SpinnerAdaptor(
     private val items: MutableList<SymbolItem>

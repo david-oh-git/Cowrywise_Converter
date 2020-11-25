@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.davidosemwota.core.base.BaseListAdaptor
-import io.davidosemwota.cowrywiseconverter.convertamount.SymbolItem
+import io.davidosemwota.core.data.SymbolItem
+import io.davidosemwota.cowrywiseconverter.listofsymbols.SymbolListViewModel
 
-class SymbolItemAdaptor : BaseListAdaptor<SymbolItem>(
+class SymbolItemAdaptor(
+    private val viewModel: SymbolListViewModel
+) : BaseListAdaptor<SymbolItem>(
     itemsSame = { old, new -> old.code == new.code },
     contentsSame = { old, new -> old.code == new.code && old.name == new.name }
 ) {
@@ -27,7 +30,7 @@ class SymbolItemAdaptor : BaseListAdaptor<SymbolItem>(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is SymbolItemViewHolder -> holder.bind(getItem(position))
+            is SymbolItemViewHolder -> holder.bind(getItem(position), viewModel)
         }
     }
 }

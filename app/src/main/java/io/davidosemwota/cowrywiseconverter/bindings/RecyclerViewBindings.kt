@@ -21,28 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.davidosemwota.cowrywiseconverter
+package io.davidosemwota.cowrywiseconverter.bindings
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import io.davidosemwota.core.ServiceLocator
-import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
-import io.davidosemwota.cowrywiseconverter.databinding.ActivityMainBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import io.davidosemwota.cowrywiseconverter.recyclerview.RecyclerViewItemDecoration
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-//        firstTimeDatabasePreload()
-
-    }
-
-    private fun firstTimeDatabasePreload(){
-        ServiceLocator.firstTimePopulateDatabaseWithCurrencySymbols(applicationContext)
-    }
+/**
+ * Add an [RecyclerViewItemDecoration] to this RecyclerView.
+ *
+ * @param spacingPx Spacing in pixels to set as a item margin.
+ */
+@BindingAdapter("itemDecorationSpacing")
+fun RecyclerView.setItemDecorationSpacing(spacingPx: Float) {
+    addItemDecoration(
+        RecyclerViewItemDecoration(spacingPx.toInt())
+    )
 }

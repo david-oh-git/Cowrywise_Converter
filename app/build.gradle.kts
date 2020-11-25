@@ -6,14 +6,7 @@ import BuildAndroidConfig.target_sdk_version
 import BuildAndroidConfig.test_instrumentation_runner
 import BuildAndroidConfig.version_code
 import BuildAndroidConfig.version_name
-import dependencies.BuildDependencies.app_compat
-import dependencies.BuildDependencies.constraints_layout
-import dependencies.BuildDependencies.kotlin_coroutines_android
-import dependencies.BuildDependencies.kotlin_coroutines_core
-import dependencies.BuildDependencies.material_components
 import dependencies.BuildDependencies
-import dependencies.BuildDependencies.navigation_fragment
-import dependencies.BuildDependencies.timber
 import extentions.addTestsDependencies
 import extentions.getLocalProperty
 

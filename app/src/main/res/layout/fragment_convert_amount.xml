@@ -16,20 +16,40 @@
         android:layout_height="match_parent"
         tools:context=".convertamount.ConvertAmountFragment">
 
+        <ImageView
+                    android:id="@+id/icon"
+                    android:src="@drawable/ic_ham"
+            android:contentDescription="@string/hamburger_icon"
+                    app:layout_constraintTop_toTopOf="@id/top_guideline"
+                    app:layout_constraintStart_toStartOf="@id/start_guideline"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sign_up"
+            android:text="@string/appbar_text"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textColor="@color/app_green"
+            app:layout_constraintTop_toTopOf="@id/top_guideline"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView"
             style="@style/TitleTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/title_top_margin"
-            android:layout_marginEnd="8dp"
             android:fontFamily="@font/montserrat_alternates"
             android:text="@string/currency"
+            app:layout_constraintTop_toBottomOf="@id/icon"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+             />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView2"
@@ -126,13 +146,49 @@
 
         </LinearLayout>
 
+        <io.davidosemwota.cowrywiseconverter.customviews.FakeSpinner
+            android:id="@+id/from_fake_spinner"
+            app:fake_spinner_text="@{ vm.fromCode }"
+            android:layout_marginTop="30dp"
+            app:fake_spinner_icon_bacground="@color/app_blue"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/id_layout_to"
+            app:layout_constraintEnd_toStartOf="@id/exchange_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <io.davidosemwota.cowrywiseconverter.customviews.FakeSpinner
+            android:id="@+id/to_fake_spinner"
+            app:fake_spinner_text="@{ vm.toCode }"
+            app:fake_spinner_icon_bacground="@color/app_blue"
+            app:layout_constraintTop_toTopOf="@id/from_fake_spinner"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/exchange_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/exchange_icon"
+            android:contentDescription="@string/exchange_icon"
+            android:src="@drawable/ic_swap"
+            app:layout_constraintTop_toTopOf="@id/from_fake_spinner"
+            app:layout_constraintBottom_toBottomOf="@id/from_fake_spinner"
+            app:layout_constraintStart_toStartOf="@id/middle_guideline"
+            app:layout_constraintEnd_toEndOf="@id/middle_guideline"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/convert_btn"
             android:text="@string/framgent_covert_btn"
             android:textAllCaps="false"
-            app:layout_constraintTop_toBottomOf="@id/id_layout_to"
+            app:elevation="4dp"
+            android:textSize="22sp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/app_green"
+            app:layout_constraintTop_toBottomOf="@id/from_fake_spinner"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
@@ -154,6 +210,20 @@
             android:id="@+id/end_guideline"
             app:layout_constraintGuide_end="24dp"
             android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            app:layout_constraintGuide_begin="24dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/middle_guideline"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

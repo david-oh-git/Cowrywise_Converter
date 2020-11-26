@@ -15,3 +15,5 @@ const val DATABASE_VERSION = 1
 const val FROM_CODE_KEY = "from_code_key"
 
 const val TO_CODE_KEY = "to_code_key"
+
+const val FIRST_TIME_INSTALL = "first_time"

@@ -28,6 +28,7 @@ class PopulateDatabaseRunnable(
             Timber.d("runable size is ${symbols.size}")
 
             symbols.forEach { repository.save(it) }
+            ServiceLocator.databaseInitialised(context)
         }
     }
 }

@@ -1,6 +1,7 @@
 package io.davidosemwota.core
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import io.davidosemwota.core.data.source.DefaultRepository
@@ -11,6 +12,7 @@ import io.davidosemwota.core.data.source.local.SymbolsLocalDataSource
 import io.davidosemwota.core.data.source.remote.SymbolsRemoteDataSource
 import io.davidosemwota.core.mapper.SymbolListMapper
 import io.davidosemwota.core.network.FixerIoApiFactory
+import io.davidosemwota.core.utils.FIRST_TIME_INSTALL
 import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
 import io.davidosemwota.core.workers.PopulateDatabaseRunnable
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +69,22 @@ object ServiceLocator {
     }
 
     fun firstTimePopulateDatabaseWithCurrencySymbols(context: Context) {
+        val firstTimeLaunch = isFirstTimeLaunch(context)
+        if (firstTimeLaunch)
+            return
+
         Thread(PopulateDatabaseRunnable(context.applicationContext)).apply { start() }
+    }
+
+    private fun isFirstTimeLaunch(context: Context): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+            .getBoolean(FIRST_TIME_INSTALL, false)
+    }
+
+    fun databaseInitialised(context: Context){
+        PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+            .edit {
+                putBoolean(FIRST_TIME_INSTALL, true)
+            }
     }
 }

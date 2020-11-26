@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        firstTimeDatabasePreload()
+        firstTimeDatabasePreload()
     }
 
     private fun firstTimeDatabasePreload() {

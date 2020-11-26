@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import io.davidosemwota.core.utils.FROM_CODE_KEY
+import io.davidosemwota.core.utils.TO_CODE_KEY
 import io.davidosemwota.cowrywiseconverter.ConverterApp
 import io.davidosemwota.cowrywiseconverter.databinding.FragmentConvertAmountBinding
 import timber.log.Timber
@@ -41,15 +42,17 @@ class ConvertAmountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fromFakeSpinner.setOnClickListener {
-            navigateToSymbolListFragment()
+            navigateToSymbolListFragment(FROM_CODE_KEY)
+        }
+
+        binding.toFakeSpinner.setOnClickListener {
+            navigateToSymbolListFragment(TO_CODE_KEY)
         }
     }
 
-    private fun navigateToSymbolListFragment() {
+    private fun navigateToSymbolListFragment(code: String) {
         val action = ConvertAmountFragmentDirections
-            .actionConvertAmountFragmentToSymbolListFragment(FROM_CODE_KEY)
+            .actionConvertAmountFragmentToSymbolListFragment(code)
         findNavController().navigate(action)
-
-        Timber.d("from code is ${viewModel.fromCode.value}")
     }
 }

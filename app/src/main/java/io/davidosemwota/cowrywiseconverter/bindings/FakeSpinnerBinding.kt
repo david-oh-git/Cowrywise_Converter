@@ -9,6 +9,6 @@ import io.davidosemwota.cowrywiseconverter.customviews.FakeSpinner
  * @param text The text value.
  */
 @BindingAdapter("fake_spinner_text")
-fun FakeSpinner.setSpinnerText(text: String){
+fun FakeSpinner.setSpinnerText(text: String) {
     spinnerText = text
 }

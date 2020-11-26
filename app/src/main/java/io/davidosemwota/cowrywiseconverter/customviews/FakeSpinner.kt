@@ -13,7 +13,7 @@ class FakeSpinner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : MaterialCardView( context, attrs, defStyle) {
+) : MaterialCardView(context, attrs, defStyle) {
 
     private var binding: FakeSpinnerBinding = FakeSpinnerBinding
         .inflate(LayoutInflater.from(context))
@@ -33,7 +33,7 @@ class FakeSpinner @JvmOverloads constructor(
     init {
         addView(binding.root)
 
-        context.theme.obtainStyledAttributes(attrs, R.styleable.FakeSpinner,0,0)
+        context.theme.obtainStyledAttributes(attrs, R.styleable.FakeSpinner, 0, 0)
             .apply {
 
                 try {
@@ -45,8 +45,7 @@ class FakeSpinner @JvmOverloads constructor(
 
                     binding.spinnerText.text = spinnerText
                     binding.spinnerIcon.setBackgroundColor(iconColor)
-                }
-                finally {
+                } finally {
                     recycle()
                 }
             }

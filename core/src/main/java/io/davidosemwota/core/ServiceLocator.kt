@@ -81,7 +81,7 @@ object ServiceLocator {
             .getBoolean(FIRST_TIME_INSTALL, false)
     }
 
-    fun databaseInitialised(context: Context){
+    fun databaseInitialised(context: Context) {
         PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
             .edit {
                 putBoolean(FIRST_TIME_INSTALL, true)

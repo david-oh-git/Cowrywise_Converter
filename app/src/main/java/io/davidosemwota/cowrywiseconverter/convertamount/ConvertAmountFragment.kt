@@ -11,7 +11,6 @@ import io.davidosemwota.core.utils.FROM_CODE_KEY
 import io.davidosemwota.core.utils.TO_CODE_KEY
 import io.davidosemwota.cowrywiseconverter.ConverterApp
 import io.davidosemwota.cowrywiseconverter.databinding.FragmentConvertAmountBinding
-import timber.log.Timber
 
 /**
  */

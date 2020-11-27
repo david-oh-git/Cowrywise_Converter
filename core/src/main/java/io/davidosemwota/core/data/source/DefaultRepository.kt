@@ -2,6 +2,7 @@ package io.davidosemwota.core.data.source
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import io.davidosemwota.core.data.Rate
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.utils.FROM_CODE_KEY
 import io.davidosemwota.core.utils.TO_CODE_KEY
@@ -32,6 +33,15 @@ class DefaultRepository(
     override suspend fun getSymbols(key: String): List<Symbol> = withContext(ioDispatcher) {
         return@withContext remoteDataSource.getSymbols(key)
     }
+
+    override suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate> =
+        withContext(ioDispatcher) {
+            return@withContext remoteDataSource.getHistoricalRate(
+                date = date,
+                key = key,
+                symbols = symbols
+            )
+        }
 
     override fun getSymbolsFlow(): Flow<List<Symbol>> {
         return localDataSource.getSymbolsFlow()

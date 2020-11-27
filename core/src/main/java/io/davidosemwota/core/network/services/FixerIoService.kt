@@ -45,10 +45,9 @@ interface FixerIoService {
     ): ConvertResponse
 
     @GET("{date}")
-    suspend fun getHistoricalRates(
+    suspend fun getHistoricalRate(
         @Path("date") date: String,
         @Query("access_key") key: String,
-        @Query("base") base: String,
         @Query("symbols", encoded = true) symbols: String
     ): RatesListResponse
 

@@ -5,6 +5,7 @@ import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import io.davidosemwota.core.data.source.SymbolsDataSource
+import io.davidosemwota.core.mapper.RateMapper
 import io.davidosemwota.core.mapper.SymbolListMapper
 import io.davidosemwota.core.network.services.FixerIoService
 import kotlinx.coroutines.Dispatchers
@@ -26,17 +27,20 @@ internal class SymbolsRemoteDataSourceTest {
 
     @Mock
     lateinit var service: FixerIoService
-    lateinit var mapper: SymbolListMapper
+    lateinit var symbolsMapper: SymbolListMapper
+    lateinit var rateMapper: RateMapper
     private lateinit var remoteDataSource: SymbolsDataSource
 
     @BeforeEach
     fun init() {
         MockitoAnnotations.initMocks(this)
-        mapper = SymbolListMapper()
+        symbolsMapper = SymbolListMapper()
+        rateMapper = RateMapper()
 
         remoteDataSource = SymbolsRemoteDataSource(
             service = service,
-            mapper = mapper,
+            symbolMapper = symbolsMapper,
+            rateMapper = rateMapper,
             ioDispatcher = Dispatchers.Unconfined
         )
     }

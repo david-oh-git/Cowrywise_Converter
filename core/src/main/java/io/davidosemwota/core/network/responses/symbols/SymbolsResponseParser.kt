@@ -12,14 +12,14 @@ import timber.log.Timber
 /**
  * Deserializer class for Fixer IO API response
  */
-class SymbolsResponseParser : JsonDeserializer<SymbolsResponse> {
+class SymbolsResponseParser : JsonDeserializer<BaseResponse> {
 
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): SymbolsResponse? {
-        val result = SymbolsResponse()
+    ): BaseResponse? {
+        val result = BaseResponse()
 
         try {
             json?.let {

@@ -1,8 +1,8 @@
 package io.davidosemwota.core.mapper
 
 import com.google.common.truth.Truth.assertThat
+import io.davidosemwota.core.network.responses.symbols.BaseResponse
 import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
-import io.davidosemwota.core.network.responses.symbols.SymbolsResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.DisplayName
@@ -23,7 +23,7 @@ internal class SymbolListMapperTest {
         val poundsValue = "British pounds sterling"
         symbolsMap[nairaKey] = nairaValue
         symbolsMap[poundsKey] = poundsValue
-        val symbolsResponse = SymbolsResponse(symbolsMap)
+        val symbolsResponse = BaseResponse(symbolsMap)
         val symbolsListResponse = SymbolsListResponse(
             success = true,
             error = null,

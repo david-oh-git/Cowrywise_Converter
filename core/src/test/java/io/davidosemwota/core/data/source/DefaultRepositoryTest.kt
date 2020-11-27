@@ -1,7 +1,6 @@
 package io.davidosemwota.core.data.source
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
+import android.content.SharedPreferences
 import com.google.common.truth.Truth.assertThat
 import io.davidosemwota.core.data.Symbol
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +26,7 @@ internal class DefaultRepositoryTest {
     private lateinit var remoteDataSource: SymbolsDataSource
 
     @Mock
-    lateinit var dataStore: DataStore<Preferences>
+    lateinit var preferences: SharedPreferences
 
     private lateinit var repository: SymbolsRepository
 
@@ -41,14 +40,16 @@ internal class DefaultRepositoryTest {
             localDataSource = localDataSource,
             remoteDataSource = remoteDataSource,
             ioDispatcher = Dispatchers.Unconfined,
-            dataStore
+            preferences
         )
     }
 
     @Test
     fun getAllSymbolsEmptyLocalSource() = runBlockingTest {
         val emptySource = FakeDataSource()
-        repository = DefaultRepository(emptySource, emptySource, Dispatchers.Unconfined, dataStore)
+        repository = DefaultRepository(
+            emptySource, emptySource, Dispatchers.Unconfined, preferences
+        )
 
         val result = repository.getSymbols()
 

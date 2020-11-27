@@ -11,6 +11,6 @@ import io.davidosemwota.core.network.responses.Error
  */
 data class SymbolsListResponse(
     val success: Boolean,
-    val symbols: SymbolsResponse?,
+    val symbols: BaseResponse?,
     val error: Error?
 )

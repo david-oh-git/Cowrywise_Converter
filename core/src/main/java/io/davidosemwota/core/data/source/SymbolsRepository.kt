@@ -1,6 +1,8 @@
 package io.davidosemwota.core.data.source
 
+import io.davidosemwota.core.data.Rate
 import io.davidosemwota.core.data.Symbol
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -9,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
  *
  *  Handles data operations
  */
+@ExperimentalCoroutinesApi
 interface SymbolsRepository {
 
     /**
@@ -25,6 +28,8 @@ interface SymbolsRepository {
      * Get a list of all currency [Symbol] from Fixer IO API.
      */
     suspend fun getSymbols(key: String): List<Symbol>
+
+    suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate>
 
     /**
      * Get a list of all [Symbol] from the database via [Flow].

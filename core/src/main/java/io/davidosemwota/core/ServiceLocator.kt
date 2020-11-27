@@ -10,13 +10,16 @@ import io.davidosemwota.core.data.source.SymbolsRepository
 import io.davidosemwota.core.data.source.local.FixerIoDatabase
 import io.davidosemwota.core.data.source.local.SymbolsLocalDataSource
 import io.davidosemwota.core.data.source.remote.SymbolsRemoteDataSource
+import io.davidosemwota.core.mapper.RateMapper
 import io.davidosemwota.core.mapper.SymbolListMapper
 import io.davidosemwota.core.network.FixerIoApiFactory
 import io.davidosemwota.core.utils.FIRST_TIME_INSTALL
 import io.davidosemwota.core.utils.SYMBOL_FILE_NAME
 import io.davidosemwota.core.workers.PopulateDatabaseRunnable
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 object ServiceLocator {
 
     private var database: FixerIoDatabase? = null
@@ -52,6 +55,7 @@ object ServiceLocator {
         return SymbolsRemoteDataSource(
             FixerIoApiFactory.provideFixerApiService(),
             SymbolListMapper(),
+            RateMapper(),
             Dispatchers.IO
         )
     }

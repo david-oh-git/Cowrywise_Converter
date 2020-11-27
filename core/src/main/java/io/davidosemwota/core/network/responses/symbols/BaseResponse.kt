@@ -5,6 +5,6 @@ package io.davidosemwota.core.network.responses.symbols
  *
  * @param data A map of all currency code to currency name.
  */
-data class SymbolsResponse(
+data class BaseResponse(
     var data: Map<String, String> = mutableMapOf()
 )

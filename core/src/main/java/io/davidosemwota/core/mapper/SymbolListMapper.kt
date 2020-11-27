@@ -1,8 +1,8 @@
 package io.davidosemwota.core.mapper
 
 import io.davidosemwota.core.data.Symbol
+import io.davidosemwota.core.network.responses.symbols.BaseResponse
 import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
-import io.davidosemwota.core.network.responses.symbols.SymbolsResponse
 
 /**
  * Helper class to transform [SymbolsListResponse] input to list of [Symbol] output.
@@ -16,9 +16,9 @@ open class SymbolListMapper : Mapper<SymbolsListResponse, List<Symbol>> {
      * @return A list of symbols.
      */
     override suspend fun transform(from: SymbolsListResponse): List<Symbol> {
-        val symbols: SymbolsResponse = from.symbols ?: return emptyList()
+        val base: BaseResponse = from.symbols ?: return emptyList()
 
-        return mapToList(symbols.data)
+        return mapToList(base.data)
     }
 
     private fun mapToList(data: Map<String, String>): List<Symbol> {

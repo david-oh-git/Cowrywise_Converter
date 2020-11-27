@@ -1,5 +1,6 @@
 package io.davidosemwota.core.data.source.local
 
+import io.davidosemwota.core.data.Rate
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.data.source.SymbolsDataSource
 import kotlinx.coroutines.CoroutineDispatcher
@@ -41,5 +42,9 @@ class SymbolsLocalDataSource(
      */
     override suspend fun save(symbol: Symbol) = withContext(ioDispatcher) {
         symbolDao.save(symbol)
+    }
+
+    override suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate> {
+        TODO("Not yet implemented")
     }
 }

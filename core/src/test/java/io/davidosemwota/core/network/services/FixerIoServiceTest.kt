@@ -67,15 +67,13 @@ internal class FixerIoServiceTest {
 
         val key = "mockkey"
         val date = "2013-12-24"
-        val base = "GBP"
         val symbols = "USD,EUR,CAD"
         val HTTP_REQ = "GET"
-        val expectedRequestUrl = "/$date?access_key=$key&base=$base&symbols=$symbols"
+        val expectedRequestUrl = "/$date?access_key=$key&symbols=$symbols"
 
-        service.getHistoricalRates(
+        service.getHistoricalRate(
             key = key,
             date = date,
-            base = base,
             symbols = symbols
         )
 
@@ -98,12 +96,11 @@ internal class FixerIoServiceTest {
         val date = "2013-12-24"
         val base = "GBP"
         val symbols = "USD,EUR,CAD"
-        val expectedRequestUrl = "/$date?access_key=$key&base=$base&symbols=$symbols"
+        val expectedRequestUrl = "/$date?access_key=$key&symbols=$symbols"
 
-        val response = service.getHistoricalRates(
+        val response = service.getHistoricalRate(
             key = key,
             date = date,
-            base = base,
             symbols = symbols
         )
 
@@ -126,14 +123,12 @@ internal class FixerIoServiceTest {
 
         val key = "mockkey"
         val date = "2013-12-24"
-        val base = "GBP"
         val symbols = "USD,EUR,CAD"
-        val expectedRequestUrl = "/$date?access_key=$key&base=$base&symbols=$symbols"
+        val expectedRequestUrl = "/$date?access_key=$key&symbols=$symbols"
 
-        val response = service.getHistoricalRates(
+        val response = service.getHistoricalRate(
             key = key,
             date = date,
-            base = base,
             symbols = symbols
         )
 

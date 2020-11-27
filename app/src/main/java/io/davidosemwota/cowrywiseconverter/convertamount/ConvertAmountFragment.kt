@@ -47,6 +47,10 @@ class ConvertAmountFragment : Fragment() {
         binding.toFakeSpinner.setOnClickListener {
             navigateToSymbolListFragment(TO_CODE_KEY)
         }
+
+        binding.convertBtn.setOnClickListener {
+            viewModel.convert()
+        }
     }
 
     private fun navigateToSymbolListFragment(code: String) {

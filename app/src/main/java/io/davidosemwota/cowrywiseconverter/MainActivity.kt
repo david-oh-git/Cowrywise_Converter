@@ -27,7 +27,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.davidosemwota.core.ServiceLocator
 import io.davidosemwota.cowrywiseconverter.databinding.ActivityMainBinding
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

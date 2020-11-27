@@ -1,6 +1,7 @@
 package io.davidosemwota.core.network.responses.rates
 
 import io.davidosemwota.core.network.responses.Error
+import io.davidosemwota.core.network.responses.symbols.BaseResponse
 
 /**
  * Generic network response from the fixer API rates endpoint.
@@ -14,8 +15,9 @@ import io.davidosemwota.core.network.responses.Error
 data class RatesListResponse(
     val success: Boolean,
     val timestamp: Long?,
+    val historical: Boolean?,
     val base: String?,
     val date: String?,
-    val rates: RatesResponse?,
+    val rates: BaseResponse?,
     val error: Error?
 )

@@ -68,9 +68,10 @@ dependencies {
         implementation(room_db)
         implementation(room_ktx)
         implementation(livedata_ktx)
-        implementation(data_store)
         implementation(recycler_view)
         implementation(preference)
+        implementation(kotlin_coroutines_android)
+        implementation(kotlin_coroutines_core)
 
         kapt(room_compiler)
     }

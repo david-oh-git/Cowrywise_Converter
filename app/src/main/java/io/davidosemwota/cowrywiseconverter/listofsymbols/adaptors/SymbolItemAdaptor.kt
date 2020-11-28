@@ -13,7 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  * from the database.
  */
 @ExperimentalCoroutinesApi
-class SymbolItemAdaptor (
+class SymbolItemAdaptor(
     private val viewModel: SymbolListViewModel
 ) : BaseListAdaptor<SymbolItem>(
     itemsSame = { old, new -> old.code == new.code },

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import io.davidosemwota.cowrywiseconverter.R
 import io.davidosemwota.cowrywiseconverter.databinding.FakeSpinnerBinding
@@ -16,7 +17,7 @@ class FakeSpinner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : MaterialCardView(context, attrs, defStyle) {
+) : ConstraintLayout(context, attrs, defStyle) {
 
     private var binding: FakeSpinnerBinding = FakeSpinnerBinding
         .inflate(LayoutInflater.from(context))

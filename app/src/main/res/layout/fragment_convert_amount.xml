@@ -17,12 +17,13 @@
         tools:context=".convertamount.ConvertAmountFragment">
 
         <ImageView
-                    android:id="@+id/icon"
+                    android:id="@+id/hamburger_icon"
                     android:src="@drawable/ic_ham"
             android:contentDescription="@string/hamburger_icon"
-                    app:layout_constraintTop_toTopOf="@id/top_guideline"
+                    app:layout_constraintTop_toTopOf="@id/sign_up"
                     app:layout_constraintStart_toStartOf="@id/start_guideline"
-                    android:layout_width="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/sign_up"
+                    android:layout_width="25dp"
                     android:layout_height="30dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -43,13 +44,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/title_top_margin"
-            android:fontFamily="@font/montserrat_alternates"
+            android:fontFamily="@font/montserrat"
             android:text="@string/currency"
-            app:layout_constraintTop_toBottomOf="@id/icon"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-             />
+            app:layout_constraintTop_toBottomOf="@id/hamburger_icon" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView2"
@@ -187,6 +187,8 @@
             app:elevation="4dp"
             android:textSize="22sp"
             android:layout_marginTop="30dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:backgroundTint="@color/app_green"
             app:layout_constraintTop_toBottomOf="@id/from_fake_spinner"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"

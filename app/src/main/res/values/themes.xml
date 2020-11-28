@@ -30,6 +30,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/faded_text_colour</item>
         <item name="android:textAlignment">center</item>
+        <item name="fontFamily">@font/arimo</item>
     </style>
 
     <style name="CircleImageView" parent="" >

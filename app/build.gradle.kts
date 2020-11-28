@@ -53,11 +53,25 @@ android {
         }
     }
 
+    signingConfigs {
+        create(BuildType.RELEASE) {
+            keyAlias = getLocalProperty("signing.key.alias")
+            keyPassword = getLocalProperty("signing.key.password")
+            storeFile = file(getLocalProperty("signing.store.file"))
+            storePassword = getLocalProperty("signing.store.password")
+
+            isV2SigningEnabled = true
+        }
+    }
+
     buildTypes {
 
         getByName(BuildType.RELEASE){
             isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
+            isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
             proguardFiles( getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+            signingConfig = signingConfigs.getByName(name)
         }
 
         getByName(BuildType.DEBUG){
@@ -91,6 +105,7 @@ android {
     buildFeatures{
         dataBinding = true
     }
+
 }
 
 dependencies {

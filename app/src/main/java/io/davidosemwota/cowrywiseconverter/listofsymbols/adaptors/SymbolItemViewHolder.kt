@@ -5,7 +5,12 @@ import io.davidosemwota.core.base.BaseViewHolder
 import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.cowrywiseconverter.databinding.SymbolItemBinding
 import io.davidosemwota.cowrywiseconverter.listofsymbols.SymbolListViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+/**
+ * ViewHolder class for SymbolItemAdaptor.
+ */
+@ExperimentalCoroutinesApi
 internal class SymbolItemViewHolder(
     inflater: LayoutInflater
 ) : BaseViewHolder<SymbolItemBinding>(

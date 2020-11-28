@@ -44,6 +44,9 @@ class SymbolsLocalDataSource(
         symbolDao.save(symbol)
     }
 
+    /**
+     * Not required here.
+     */
     override suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate> {
         TODO("Not yet implemented")
     }

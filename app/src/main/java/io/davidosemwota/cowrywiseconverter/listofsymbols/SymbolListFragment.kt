@@ -10,14 +10,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.core.extentions.observe
+import io.davidosemwota.core.mapper.SymbolItemMapper
 import io.davidosemwota.cowrywiseconverter.ConverterApp
-import io.davidosemwota.cowrywiseconverter.convertamount.SymbolItemMapper
 import io.davidosemwota.cowrywiseconverter.databinding.FragmentSymbolListBinding
 import io.davidosemwota.cowrywiseconverter.listofsymbols.adaptors.SymbolItemAdaptor
-import timber.log.Timber
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
+ * Fragment that displays a list of all currency symbols.
+ *
+ * Reused for both FROM and TO symbols.
  */
+@ExperimentalCoroutinesApi
 class SymbolListFragment : Fragment() {
 
     private val args: SymbolListFragmentArgs by navArgs()
@@ -30,7 +34,7 @@ class SymbolListFragment : Fragment() {
     }
     private val adaptor: SymbolItemAdaptor by lazy { SymbolItemAdaptor(viewModel) }
 
-    var fragmentTypeCode = ""
+    var fragmentSymbol = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +57,7 @@ class SymbolListFragment : Fragment() {
         observe(viewModel.listOfSymbols, ::onViewDataChange)
         observe(viewModel.event, ::onViewEvent)
         setUpRecyclerView()
-        fragmentTypeCode = args.fragmentType
+        fragmentSymbol = args.fragmentSymbol
     }
 
     private fun setUpRecyclerView() {
@@ -62,16 +66,13 @@ class SymbolListFragment : Fragment() {
 
     private fun onViewDataChange(data: List<SymbolItem>) {
         adaptor.submitList(data)
-
-        Timber.d("data size is ${data.size}")
-        Timber.d("State is ${viewModel.state.value}")
     }
 
     private fun onViewEvent(viewEvent: SymbolListViewEvent) {
 
         when (viewEvent) {
             is SymbolListViewEvent.SaveSymbolCodeAndClose -> {
-                viewModel.save(fragmentTypeCode, viewEvent.code)
+                viewModel.save(fragmentSymbol, viewEvent.code)
                 findNavController().popBackStack()
             }
         }

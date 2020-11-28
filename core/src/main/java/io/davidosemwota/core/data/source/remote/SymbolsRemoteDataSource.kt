@@ -27,6 +27,13 @@ class SymbolsRemoteDataSource(
         return@withContext symbolMapper.transform(symbolsListResponse)
     }
 
+    /**
+     * Get conversion rates from Fixer IO API.
+     *
+     * @param date The date.
+     * @param key The API request key.
+     * @param symbols The currency symbols to be converted. eg 'USD,CAD'
+     */
     override suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate> =
         withContext(ioDispatcher) {
             val rateResponse = service.getHistoricalRate(

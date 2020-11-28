@@ -1,5 +1,6 @@
 package io.davidosemwota.core.network.responses.symbols
 
+import io.davidosemwota.core.network.responses.BaseResponse
 import io.davidosemwota.core.network.responses.Error
 
 /**

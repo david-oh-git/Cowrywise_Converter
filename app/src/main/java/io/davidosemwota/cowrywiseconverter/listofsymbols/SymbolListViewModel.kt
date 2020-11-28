@@ -13,10 +13,14 @@ import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.core.data.source.SymbolsRepository
 import io.davidosemwota.core.mapper.Mapper
 import io.davidosemwota.core.utils.SingleLiveData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
+/**
+ *
+ */
+@ExperimentalCoroutinesApi
 class SymbolListViewModel(
     private val repository: SymbolsRepository,
     private val symbolListMapper: Mapper<List<Symbol>, List<SymbolItem>>
@@ -51,7 +55,6 @@ class SymbolListViewModel(
 
     fun saveSymbolCodeAndCloseSymbolListFragment(code: String) {
         event.postValue(SymbolListViewEvent.SaveSymbolCodeAndClose(code))
-        Timber.d("I was clicked !!")
     }
 
     fun save(key: String, code: String) = viewModelScope.launch {
@@ -60,8 +63,6 @@ class SymbolListViewModel(
 
     fun setState(state: SymbolListViewState) {
         _state.postValue(state)
-
-        Timber.d("State set to ${_state.value}")
     }
 
     private fun searchSymbols(query: String?, symbols: List<Symbol>): LiveData<List<SymbolItem>> {
@@ -94,6 +95,7 @@ class SymbolListViewModel(
     }
 }
 
+@ExperimentalCoroutinesApi
 @Suppress("UNCHECKED_CAST")
 class SymbolListViewModelFactory(
     private val repository: SymbolsRepository,

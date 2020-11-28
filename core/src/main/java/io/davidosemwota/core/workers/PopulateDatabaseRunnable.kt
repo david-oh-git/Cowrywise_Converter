@@ -4,11 +4,20 @@ import android.content.Context
 import io.davidosemwota.core.BuildConfig
 import io.davidosemwota.core.ServiceLocator
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+/**
+ * A runnable for the first time the app is launched.
+ *
+ * It gets a list of all symbols from the Fixer IO API.
+ */
+
+@ExperimentalStdlibApi
+@ExperimentalCoroutinesApi
 class PopulateDatabaseRunnable(
     private val context: Context
 ) : Runnable {

@@ -3,7 +3,7 @@ package io.davidosemwota.core.network.services
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.GsonBuilder
-import io.davidosemwota.core.network.responses.symbols.SymbolsResponseParser
+import io.davidosemwota.core.network.responses.CustomResponseParser
 import io.davidosemwota.core.utils.getJson
 import java.net.HttpURLConnection
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -39,7 +39,7 @@ internal class FixerIoServiceTest {
         mockWebServer = MockWebServer()
         mockWebServer.start()
         val customSymbolsConverter = GsonBuilder()
-            .registerTypeAdapter(SymbolsResponseParser::class.java, SymbolsResponseParser())
+            .registerTypeAdapter(CustomResponseParser::class.java, CustomResponseParser())
             .create()
 
         service = Retrofit.Builder()

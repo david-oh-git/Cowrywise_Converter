@@ -1,6 +1,5 @@
 package io.davidosemwota.core.network.services
 
-import io.davidosemwota.core.network.responses.convert.ConvertResponse
 import io.davidosemwota.core.network.responses.rates.RatesListResponse
 import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
 import retrofit2.http.GET
@@ -20,30 +19,12 @@ interface FixerIoService {
     ): SymbolsListResponse
 
     /**
-     * Get a list of rates from the API Service.
+     * Get conversion rates from Fixer IO API.
      *
-     * @param key Request key for the API service.
-     * @param base The base currency symbol.
-     * @param symbols A list of comma separated currency symbols.
+     * @param date The date.
+     * @param key The API request key.
+     * @param symbols The from and to symbols to be converted. eg 'AED,NGN'
      */
-    @GET(RATES_ENDPOINT)
-    suspend fun getRates(
-        @Query("access_key") key: String,
-        @Query("base") base: String,
-        @Query("symbols", encoded = true) symbols: String
-    ): RatesListResponse
-
-    /**
-     * Converts from one currency symbol to another and returns the converted amount.
-     */
-    @GET(CONVERT_ENDPOINT)
-    suspend fun convert(
-        @Query("access_key") key: String,
-        @Query("from") from: String,
-        @Query("to") to: String,
-        @Query("amount") amount: Long
-    ): ConvertResponse
-
     @GET("{date}")
     suspend fun getHistoricalRate(
         @Path("date") date: String,
@@ -53,7 +34,5 @@ interface FixerIoService {
 
     companion object {
         private const val SYMBOLS_ENDPOINT = "symbols"
-        private const val RATES_ENDPOINT = "latest"
-        private const val CONVERT_ENDPOINT = "convert"
     }
 }

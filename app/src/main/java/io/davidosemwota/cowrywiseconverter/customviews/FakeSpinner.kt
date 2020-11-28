@@ -8,7 +8,10 @@ import com.google.android.material.card.MaterialCardView
 import io.davidosemwota.cowrywiseconverter.R
 import io.davidosemwota.cowrywiseconverter.databinding.FakeSpinnerBinding
 
-// val layoutInflater = LayoutInflater.from(parent.context)
+/**
+ * A ViewGroup that imitates the look of a spinner and wraps it with
+ * [MaterialCardView].
+ */
 class FakeSpinner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

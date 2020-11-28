@@ -1,7 +1,7 @@
 package io.davidosemwota.core.mapper
 
 import io.davidosemwota.core.data.Symbol
-import io.davidosemwota.core.network.responses.symbols.BaseResponse
+import io.davidosemwota.core.network.responses.BaseResponse
 import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
 
 /**

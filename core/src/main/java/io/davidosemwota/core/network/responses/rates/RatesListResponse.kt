@@ -1,7 +1,7 @@
 package io.davidosemwota.core.network.responses.rates
 
+import io.davidosemwota.core.network.responses.BaseResponse
 import io.davidosemwota.core.network.responses.Error
-import io.davidosemwota.core.network.responses.symbols.BaseResponse
 
 /**
  * Generic network response from the fixer API rates endpoint.

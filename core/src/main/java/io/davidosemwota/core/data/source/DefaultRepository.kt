@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import io.davidosemwota.core.data.Rate
 import io.davidosemwota.core.data.Symbol
-import io.davidosemwota.core.utils.FROM_CODE_KEY
-import io.davidosemwota.core.utils.TO_CODE_KEY
+import io.davidosemwota.core.utils.FROM_SYMBOL_FRAGMENT
+import io.davidosemwota.core.utils.TO_SYMBOL_FRAGMENT
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,11 +23,11 @@ class DefaultRepository(
 ) : SymbolsRepository {
 
     override val fromCode = MutableStateFlow(
-        sharedPreferences.getString(FROM_CODE_KEY, "NGN") ?: "NGN"
+        sharedPreferences.getString(FROM_SYMBOL_FRAGMENT, "NGN") ?: "NGN"
     )
 
     override val toCode: MutableStateFlow<String> = MutableStateFlow(
-        sharedPreferences.getString(TO_CODE_KEY, "USD") ?: "USD"
+        sharedPreferences.getString(TO_SYMBOL_FRAGMENT, "USD") ?: "USD"
     )
 
     override suspend fun getSymbols(key: String): List<Symbol> = withContext(ioDispatcher) {
@@ -64,16 +64,16 @@ class DefaultRepository(
     override suspend fun save(key: String, code: String) {
         Timber.d("About to save $key")
         when (key) {
-            FROM_CODE_KEY -> {
+            FROM_SYMBOL_FRAGMENT -> {
                 sharedPreferences.edit {
-                    putString(FROM_CODE_KEY, code)
+                    putString(FROM_SYMBOL_FRAGMENT, code)
                 }
 
                 fromCode.value = code
             }
-            TO_CODE_KEY -> {
+            TO_SYMBOL_FRAGMENT -> {
                 sharedPreferences.edit {
-                    putString(TO_CODE_KEY, code)
+                    putString(TO_SYMBOL_FRAGMENT, code)
                 }
 
                 toCode.value = code

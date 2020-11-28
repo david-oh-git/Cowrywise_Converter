@@ -29,7 +29,11 @@ import io.davidosemwota.core.ServiceLocator
 import io.davidosemwota.cowrywiseconverter.databinding.ActivityMainBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+/**
+ * The app entry point/ launcher activity.
+ */
 @ExperimentalCoroutinesApi
+@ExperimentalStdlibApi
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

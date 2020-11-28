@@ -17,6 +17,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * ConvertAmount ViewModel
+ */
 @ExperimentalCoroutinesApi
 class ConvertAmountViewModel(
     private val repository: SymbolsRepository
@@ -72,6 +75,7 @@ class ConvertAmountViewModel(
         get() = DecimalFormat("#,###.##").apply { roundingMode = RoundingMode.CEILING }.format(this)
 }
 
+@ExperimentalCoroutinesApi
 @Suppress("UNCHECKED_CAST")
 class ConvertAmountViewModelFactory(
     private val repository: SymbolsRepository

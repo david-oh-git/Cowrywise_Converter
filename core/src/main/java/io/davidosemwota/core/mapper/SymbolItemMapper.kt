@@ -1,8 +1,7 @@
-package io.davidosemwota.cowrywiseconverter.convertamount
+package io.davidosemwota.core.mapper
 
 import io.davidosemwota.core.data.Symbol
 import io.davidosemwota.core.data.SymbolItem
-import io.davidosemwota.core.mapper.Mapper
 
 /**
  * Helper class to transform a list of [Symbol] Room entity input to a

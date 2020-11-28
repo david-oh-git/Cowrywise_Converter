@@ -6,8 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import io.davidosemwota.core.base.BaseListAdaptor
 import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.cowrywiseconverter.listofsymbols.SymbolListViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class SymbolItemAdaptor(
+/**
+ * [RecyclerView] Adaptor displaying a list of all currency symbols
+ * from the database.
+ */
+@ExperimentalCoroutinesApi
+class SymbolItemAdaptor (
     private val viewModel: SymbolListViewModel
 ) : BaseListAdaptor<SymbolItem>(
     itemsSame = { old, new -> old.code == new.code },
@@ -28,6 +34,12 @@ class SymbolItemAdaptor(
         viewType: Int
     ): RecyclerView.ViewHolder = SymbolItemViewHolder(inflater)
 
+    /**
+     * Called by recyclerView to display data for a specified position.
+     *
+     * @param holder The viewHolder to be updated.
+     * @param position The viewHolder's position.
+     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SymbolItemViewHolder -> holder.bind(getItem(position), viewModel)

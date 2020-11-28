@@ -19,6 +19,9 @@ import io.davidosemwota.core.workers.PopulateDatabaseRunnable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+/**
+ * Single source of Data from core module.
+ */
 @ExperimentalCoroutinesApi
 object ServiceLocator {
 
@@ -72,6 +75,7 @@ object ServiceLocator {
         return result
     }
 
+    @ExperimentalStdlibApi
     fun firstTimePopulateDatabaseWithCurrencySymbols(context: Context) {
         val firstTimeLaunch = isFirstTimeLaunch(context)
         if (firstTimeLaunch)

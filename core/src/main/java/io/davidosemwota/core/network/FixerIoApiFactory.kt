@@ -2,8 +2,8 @@ package io.davidosemwota.core.network
 
 import com.google.gson.GsonBuilder
 import io.davidosemwota.core.BuildConfig
-import io.davidosemwota.core.network.responses.symbols.BaseResponse
-import io.davidosemwota.core.network.responses.symbols.SymbolsResponseParser
+import io.davidosemwota.core.network.responses.BaseResponse
+import io.davidosemwota.core.network.responses.CustomResponseParser
 import io.davidosemwota.core.network.services.FixerIoService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,7 +45,7 @@ object FixerIoApiFactory {
      */
     private fun provideRetrofitBuilder(): Retrofit {
         val customSymbolsConverter = GsonBuilder()
-            .registerTypeAdapter(BaseResponse::class.java, SymbolsResponseParser())
+            .registerTypeAdapter(BaseResponse::class.java, CustomResponseParser())
             .create()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import io.davidosemwota.core.utils.FROM_CODE_KEY
-import io.davidosemwota.core.utils.TO_CODE_KEY
+import io.davidosemwota.core.utils.FROM_SYMBOL_FRAGMENT
+import io.davidosemwota.core.utils.TO_SYMBOL_FRAGMENT
 import io.davidosemwota.cowrywiseconverter.ConverterApp
 import io.davidosemwota.cowrywiseconverter.databinding.FragmentConvertAmountBinding
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
+ * [Fragment] Displays the entry currency convert view.
  */
+
+@ExperimentalCoroutinesApi
 class ConvertAmountFragment : Fragment() {
 
     private lateinit var binding: FragmentConvertAmountBinding
@@ -40,12 +44,19 @@ class ConvertAmountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
+    }
+
+    /**
+     * Set on click listeners for view items.
+     */
+    private fun setOnClickListeners() {
         binding.fromFakeSpinner.setOnClickListener {
-            navigateToSymbolListFragment(FROM_CODE_KEY)
+            navigateToSymbolListFragment(FROM_SYMBOL_FRAGMENT)
         }
 
         binding.toFakeSpinner.setOnClickListener {
-            navigateToSymbolListFragment(TO_CODE_KEY)
+            navigateToSymbolListFragment(TO_SYMBOL_FRAGMENT)
         }
 
         binding.convertBtn.setOnClickListener {
@@ -53,6 +64,11 @@ class ConvertAmountFragment : Fragment() {
         }
     }
 
+    /**
+     * Navigate from [ConvertAmountFragment] to SymbolListFragment.
+     *
+     * @param code States the type of SymbolListFragment.
+     */
     private fun navigateToSymbolListFragment(code: String) {
         val action = ConvertAmountFragmentDirections
             .actionConvertAmountFragmentToSymbolListFragment(code)

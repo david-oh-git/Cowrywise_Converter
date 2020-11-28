@@ -1,7 +1,7 @@
 package io.davidosemwota.core.mapper
 
 import com.google.common.truth.Truth.assertThat
-import io.davidosemwota.core.network.responses.symbols.BaseResponse
+import io.davidosemwota.core.network.responses.BaseResponse
 import io.davidosemwota.core.network.responses.symbols.SymbolsListResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

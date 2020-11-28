@@ -26,9 +26,18 @@ interface SymbolsRepository {
 
     /**
      * Get a list of all currency [Symbol] from Fixer IO API.
+     *
+     * @param key The API request key.
      */
     suspend fun getSymbols(key: String): List<Symbol>
 
+    /**
+     * Get conversion rates from Fixer IO API.
+     *
+     * @param date The date.
+     * @param key The API request key.
+     * @param symbols The currency symbols to be converted. eg 'USD,CAD'
+     */
     suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate>
 
     /**
@@ -43,21 +52,23 @@ interface SymbolsRepository {
 
     /**
      * Save a [Symbol] item to the database.
+     *
+     * @param symbol Symbol item to be saved.
      */
     suspend fun save(symbol: Symbol)
 
     /**
-     * Set from Symbol code
+     * Set convert from Symbol code.
      */
     suspend fun setFromCode(code: String)
 
     /**
-     * Set to Symbol code
+     * Set convert to Symbol code.
      */
     suspend fun setToCode(code: String)
 
     /**
-     * Save symbol code to data store.
+     * Save symbol code to shared preferences.
      */
     suspend fun save(key: String, code: String)
 }

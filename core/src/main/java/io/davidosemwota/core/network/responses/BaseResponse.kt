@@ -1,4 +1,4 @@
-package io.davidosemwota.core.network.responses.symbols
+package io.davidosemwota.core.network.responses
 
 /**
  * Represent a part of the Fixer IO API Response.

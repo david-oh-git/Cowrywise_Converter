@@ -23,7 +23,7 @@
         android:label="SymbolListFragment" >
 
         <argument
-            android:name="fragment_type"
+            android:name="fragment_symbol"
             app:argType="string" />
 
     </fragment>

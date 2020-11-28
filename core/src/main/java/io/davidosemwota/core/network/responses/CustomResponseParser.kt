@@ -1,4 +1,4 @@
-package io.davidosemwota.core.network.responses.symbols
+package io.davidosemwota.core.network.responses
 
 import com.google.gson.Gson
 import com.google.gson.JsonDeserializationContext
@@ -10,9 +10,9 @@ import java.lang.reflect.Type
 import timber.log.Timber
 
 /**
- * Deserializer class for Fixer IO API response
+ * Custom deserializer class for Fixer IO API response
  */
-class SymbolsResponseParser : JsonDeserializer<BaseResponse> {
+class CustomResponseParser : JsonDeserializer<BaseResponse> {
 
     override fun deserialize(
         json: JsonElement?,

@@ -83,7 +83,7 @@ internal class FixerIoServiceTest {
     }
 
     @Test
-    fun requestGetHistoricalRates_statusCode200() = runBlocking {
+    fun requestGetHistoricalRates_statusCode200(): Unit = runBlocking {
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
@@ -105,14 +105,14 @@ internal class FixerIoServiceTest {
         )
 
         val request = mockWebServer.takeRequest()
-        assertThat(response.success).isTrue()
+        assertThat(response.isSuccessful).isTrue()
         assertThat(request.path).isEqualTo(expectedRequestUrl)
-        assertThat(response.base).isEqualTo(base)
-        assertThat(response.date).isEqualTo(date)
+        assertThat(response.body()?.base).isEqualTo(base)
+        assertThat(response.body()?.date).isEqualTo(date)
     }
 
     @Test
-    fun requestGetHistoricalRates_errorResponse() = runBlocking {
+    fun requestGetHistoricalRates_errorResponse(): Unit = runBlocking {
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
@@ -133,10 +133,9 @@ internal class FixerIoServiceTest {
         )
 
         val request = mockWebServer.takeRequest()
-        assertThat(response.success).isFalse()
+        assertThat(response.body()?.success).isFalse()
         assertThat(request.path).isEqualTo(expectedRequestUrl)
-        assertThat(response.base).isNull()
-        assertThat(response.date).isNull()
-        assertThat(response.error?.code).isEqualTo(404)
+        assertThat(response.body()?.base).isNull()
+        assertThat(response.body()?.error?.code).isEqualTo(404)
     }
 }

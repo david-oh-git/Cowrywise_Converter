@@ -116,7 +116,7 @@ class ConvertAmountFragment : Fragment() {
     }
 
     private fun onViewEvent(viewEvent: ConvertAmountViewEvent) = when (viewEvent) {
-        is ConvertAmountViewEvent.ConvertAmount -> {
+        is ConvertAmountViewEvent.ConvertInputAmount -> {
         }
 
         is ConvertAmountViewEvent.NoNetwork -> {

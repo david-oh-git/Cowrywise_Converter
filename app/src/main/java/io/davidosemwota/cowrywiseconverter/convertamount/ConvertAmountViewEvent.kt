@@ -8,7 +8,7 @@ sealed class ConvertAmountViewEvent {
     /**
      * Convert the currency amount entered.
      */
-    object ConvertAmount : ConvertAmountViewEvent()
+    object ConvertInputAmount : ConvertAmountViewEvent()
 
     /**
      * When no network is available.

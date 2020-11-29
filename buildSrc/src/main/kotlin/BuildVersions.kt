@@ -16,7 +16,6 @@ object BuildVersions {
     const val lifecycle = "2.2.0"
     const val material_spinner = "1.3.1"
     const val preference = "1.1.1"
-    const val data_store = "1.0.0-alpha04"
     const val recycler_view = "1.1.0"
 
     // Tests

@@ -74,7 +74,7 @@ class ConvertAmountViewModel(
             return@launch
         }
 
-        event.postValue(ConvertAmountViewEvent.ConvertAmount)
+        event.postValue(ConvertAmountViewEvent.ConvertInputAmount)
 
         val amount = inputAmount.value?.toDouble() ?: 0.0
         if (amount == 0.0)

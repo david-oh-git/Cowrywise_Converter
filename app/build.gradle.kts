@@ -106,10 +106,6 @@ android {
         dataBinding = true
     }
 
-    packagingOptions {
-        exclude("META-INF/androidx.preference_preference.version")
-    }
-
 }
 
 dependencies {

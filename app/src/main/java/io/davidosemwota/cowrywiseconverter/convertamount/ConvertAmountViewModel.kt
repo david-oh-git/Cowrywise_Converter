@@ -8,6 +8,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import io.davidosemwota.core.BuildConfig
 import io.davidosemwota.core.data.source.SymbolsRepository
+import io.davidosemwota.core.utils.SingleLiveData
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -50,11 +51,30 @@ class ConvertAmountViewModel(
             return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date).trim()
         }
 
+    var hasNetworkConnection: Boolean = false
+
+    val snackMessage = MutableLiveData<String>()
+
+    val event = SingleLiveData<ConvertAmountViewEvent>()
+
     fun convert() = viewModelScope.launch {
-        if (fromCode.value == toCode.value || inputAmount.value.isNullOrEmpty()) {
+
+        if (!hasNetworkConnection) {
+            event.postValue(ConvertAmountViewEvent.NoNetwork)
+            return@launch
+        }
+
+        if (inputAmount.value.isNullOrEmpty()) {
+            event.postValue(ConvertAmountViewEvent.InputTextIsEmpty)
+            return@launch
+        }
+
+        if (fromCode.value == toCode.value) {
             _convertedAmount.postValue(inputAmount.value?.toDouble()?.currencyFormat)
             return@launch
         }
+
+        event.postValue(ConvertAmountViewEvent.ConvertAmount)
 
         val amount = inputAmount.value?.toDouble() ?: 0.0
         if (amount == 0.0)
@@ -64,6 +84,11 @@ class ConvertAmountViewModel(
             key = key,
             symbols = "${fromCode.value},${toCode.value}"
         )
+
+        if (rates.isEmpty()) {
+            event.postValue(ConvertAmountViewEvent.ErrorFetchingRate)
+            return@launch
+        }
 
         val fromRate = rates.find { it.code == fromCode.value }?.rate ?: 0.0
         val toRate = rates.find { it.code == toCode.value }?.rate ?: 0.1

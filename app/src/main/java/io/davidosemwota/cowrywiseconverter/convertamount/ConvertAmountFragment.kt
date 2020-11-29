@@ -7,10 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import io.davidosemwota.core.extentions.observe
 import io.davidosemwota.core.utils.FROM_SYMBOL_FRAGMENT
 import io.davidosemwota.core.utils.TO_SYMBOL_FRAGMENT
 import io.davidosemwota.cowrywiseconverter.ConverterApp
+import io.davidosemwota.cowrywiseconverter.R
 import io.davidosemwota.cowrywiseconverter.databinding.FragmentConvertAmountBinding
+import io.davidosemwota.cowrywiseconverter.util.extentions.sendSnackMessage
+import io.davidosemwota.cowrywiseconverter.util.network.NetworkCallback
+import io.davidosemwota.cowrywiseconverter.util.network.NetworkChecker
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
@@ -27,6 +32,23 @@ class ConvertAmountFragment : Fragment() {
         )
     }
 
+    private var networkCheckCallback: NetworkCallback? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        networkCheckCallback = object : NetworkCallback() {
+
+            override fun onNetworkInActive() {
+                viewModel.hasNetworkConnection = false
+            }
+
+            override fun onNetworkActive() {
+                viewModel.hasNetworkConnection = true
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,10 +63,28 @@ class ConvertAmountFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        networkCheckCallback?.let {
+            NetworkChecker.registerNetworkAvailabilityCallback(requireContext(), it)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        networkCheckCallback?.let {
+            NetworkChecker.unRegisterNetworkAvailabilityCallback(requireContext(), it)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClickListeners()
+
+        observe(viewModel.event, ::onViewEvent)
     }
 
     /**
@@ -73,5 +113,31 @@ class ConvertAmountFragment : Fragment() {
         val action = ConvertAmountFragmentDirections
             .actionConvertAmountFragmentToSymbolListFragment(code)
         findNavController().navigate(action)
+    }
+
+    private fun onViewEvent(viewEvent: ConvertAmountViewEvent) = when (viewEvent) {
+        is ConvertAmountViewEvent.ConvertAmount -> {
+        }
+
+        is ConvertAmountViewEvent.NoNetwork -> {
+            sendSnackMessage(
+                binding.convertAmountContainer,
+                getString(R.string.no_network)
+            )
+        }
+
+        is ConvertAmountViewEvent.InputTextIsEmpty -> {
+            sendSnackMessage(
+                binding.convertAmountContainer,
+                getString(R.string.enter_amount)
+            )
+        }
+
+        is ConvertAmountViewEvent.ErrorFetchingRate -> {
+            sendSnackMessage(
+                binding.convertAmountContainer,
+                getString(R.string.error_fetching_rates)
+            )
+        }
     }
 }

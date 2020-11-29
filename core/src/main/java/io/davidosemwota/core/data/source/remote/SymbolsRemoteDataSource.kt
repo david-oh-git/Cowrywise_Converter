@@ -17,14 +17,20 @@ class SymbolsRemoteDataSource(
     private val symbolMapper: Mapper<SymbolsListResponse, List<Symbol>>,
     private val rateMapper: Mapper<RatesListResponse, List<Rate>>,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : SymbolsDataSource {
+) : SymbolsDataSource, BaseRemoteDataSource() {
 
     /**
      * Gets a list of all available symbols from Fixer IO API.
      */
     override suspend fun getSymbols(key: String): List<Symbol> = withContext(ioDispatcher) {
-        val symbolsListResponse = service.getAllSymbols(key)
-        return@withContext symbolMapper.transform(symbolsListResponse)
+
+        val symbolsListResponse = safeApiCall(
+            call = { service.getAllSymbols(key) },
+            errorMsg = "Error fetching ..."
+        )
+        return@withContext symbolsListResponse?.let {
+            symbolMapper.transform(symbolsListResponse)
+        } ?: emptyList()
     }
 
     /**
@@ -36,12 +42,19 @@ class SymbolsRemoteDataSource(
      */
     override suspend fun getHistoricalRate(date: String, key: String, symbols: String): List<Rate> =
         withContext(ioDispatcher) {
-            val rateResponse = service.getHistoricalRate(
-                date = date,
-                key = key,
-                symbols = symbols
+
+            val rateResponse = safeApiCall(
+                call = {
+                    service.getHistoricalRate(
+                        date = date,
+                        key = key,
+                        symbols = symbols
+                    )
+                },
+                errorMsg = "Error fetching ..."
             )
-            return@withContext rateMapper.transform(rateResponse)
+
+            return@withContext rateResponse?.let { rateMapper.transform(it) } ?: emptyList()
         }
 
     /**

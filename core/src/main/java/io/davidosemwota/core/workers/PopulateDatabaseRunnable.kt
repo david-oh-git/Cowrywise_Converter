@@ -35,9 +35,10 @@ class PopulateDatabaseRunnable(
             )
             val symbols = repository.getSymbols(key)
             Timber.d("runable size is ${symbols.size}")
-
-            symbols.forEach { repository.save(it) }
-            ServiceLocator.databaseInitialised(context)
+            if (symbols.isNotEmpty()) {
+                symbols.forEach { repository.save(it) }
+                ServiceLocator.databaseInitialised(context)
+            }
         }
     }
 }

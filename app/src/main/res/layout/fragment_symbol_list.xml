@@ -23,8 +23,8 @@
             app:viewModel="@{ vm }" />
 
         <include
-            android:id="@+id/include_symbol_list_error"
-            layout="@layout/view_symbols_list_error"
+            android:id="@+id/include_symbol_list_loading"
+            layout="@layout/view_symbols_list_loading"
             app:viewState="@{ vm.state }" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

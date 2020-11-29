@@ -27,7 +27,9 @@ class SymbolListViewModel(
 ) : ViewModel() {
 
     val searchQuery = MutableLiveData<String>().apply { value = "" }
-    val symbols = liveData {
+    val event = SingleLiveData<SymbolListViewEvent>()
+    private val _state = MutableLiveData<SymbolListViewState>()
+    private val symbols = liveData {
         repository.getSymbolsFlow()
             .collect {
                 emit(symbolListMapper.transform(it))
@@ -41,17 +43,17 @@ class SymbolListViewModel(
         }
     }
 
-    private val _state = MutableLiveData<SymbolListViewState>()
     val state = Transformations.map(symbols) {
 
         when {
             it.isNotEmpty() -> SymbolListViewState.Loaded
-            it.isEmpty() -> SymbolListViewState.Loaded
+            it.isEmpty() -> {
+                event.postValue(SymbolListViewEvent.NoSymbolsInDatabase)
+                SymbolListViewState.Loading
+            }
             else -> SymbolListViewState.Loading
         }
     }
-
-    val event = SingleLiveData<SymbolListViewEvent>()
 
     fun saveSymbolCodeAndCloseSymbolListFragment(code: String) {
         event.postValue(SymbolListViewEvent.SaveSymbolCodeAndClose(code))

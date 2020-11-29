@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import io.davidosemwota.core.ServiceLocator
 import io.davidosemwota.core.data.SymbolItem
 import io.davidosemwota.core.extentions.observe
 import io.davidosemwota.core.mapper.SymbolItemMapper
@@ -21,6 +22,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  *
  * Reused for both FROM and TO symbols.
  */
+@ExperimentalStdlibApi
 @ExperimentalCoroutinesApi
 class SymbolListFragment : Fragment() {
 
@@ -74,6 +76,12 @@ class SymbolListFragment : Fragment() {
             is SymbolListViewEvent.SaveSymbolCodeAndClose -> {
                 viewModel.save(fragmentSymbol, viewEvent.code)
                 findNavController().popBackStack()
+            }
+
+            is SymbolListViewEvent.NoSymbolsInDatabase -> {
+                ServiceLocator.firstTimePopulateDatabaseWithCurrencySymbols(
+                    requireContext()
+                )
             }
         }
     }

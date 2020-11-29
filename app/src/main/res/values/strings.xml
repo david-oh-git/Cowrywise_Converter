@@ -14,4 +14,7 @@
     <string name="hamburger_icon">Hamburger icon</string>
     <string name="exchange_icon">Exchange icon</string>
     <string name="fake_spinner_icon">Fake spinner icon</string>
+    <string name="no_network">No network available …</string>
+    <string name="enter_amount">Enter amount …</string>
+    <string name="error_fetching_rates">Error fetching rates …</string>
 </resources>

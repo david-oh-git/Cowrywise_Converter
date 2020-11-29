@@ -19,7 +19,7 @@
 
         <ImageView
                     android:id="@+id/hamburger_icon"
-                    android:src="@drawable/ic_ham"
+                    android:src="@drawable/ic_hamburger"
             android:contentDescription="@string/hamburger_icon"
                     app:layout_constraintTop_toTopOf="@id/sign_up"
                     app:layout_constraintStart_toStartOf="@id/start_guideline"

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import io.davidosemwota.core.data.Symbol
@@ -32,16 +31,17 @@ class SymbolListViewModel(
     private val symbols = liveData {
         repository.getSymbolsFlow()
             .collect {
-                emit(symbolListMapper.transform(it))
+                emit(it)
             }
     }
 
-    val listOfSymbols = Transformations.switchMap(searchQuery) { query ->
+    val listOfSymbols: LiveData<List<SymbolItem>> = Transformations
+        .switchMap(searchQuery) { query ->
 
-        Transformations.switchMap(repository.getSymbolsFlow().asLiveData()) { symbolsList ->
-            searchSymbols(query, symbolsList)
+            Transformations.switchMap(symbols) { symbolsList ->
+                searchSymbols(query, symbolsList)
+            }
         }
-    }
 
     val state = Transformations.map(symbols) {
 
@@ -86,8 +86,8 @@ class SymbolListViewModel(
 
         val newItems = mutableListOf<SymbolItem>()
         for (symbolItem in symbolItems) {
-            if (query.contains(query, ignoreCase = true) ||
-                query.contains(query, ignoreCase = true)
+            if (symbolItem.code.contains(query, ignoreCase = true) ||
+                symbolItem.name.contains(query, ignoreCase = true)
             ) {
                 newItems.add(symbolItem)
             }

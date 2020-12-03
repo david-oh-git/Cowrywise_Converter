@@ -5,13 +5,11 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.card.MaterialCardView
 import io.davidosemwota.cowrywiseconverter.R
 import io.davidosemwota.cowrywiseconverter.databinding.FakeSpinnerBinding
 
 /**
- * A ViewGroup that imitates the look of a spinner and wraps it with
- * [MaterialCardView].
+ * A ViewGroup that imitates the look of a spinner.
  */
 class FakeSpinner @JvmOverloads constructor(
     context: Context,
@@ -22,7 +20,7 @@ class FakeSpinner @JvmOverloads constructor(
     private var binding: FakeSpinnerBinding = FakeSpinnerBinding
         .inflate(LayoutInflater.from(context))
     companion object {
-        private const val DEFAULT_ICON_BACKGROUND = Color.MAGENTA
+        private const val DEFAULT_ICON_BACKGROUND = Color.WHITE
     }
 
     var iconColor = DEFAULT_ICON_BACKGROUND
